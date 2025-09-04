@@ -1,0 +1,52 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+
+# Firebase API Keys
+
+NEXT_PUBLIC_FIREBASE_API_KEY = AIzaSyDpZpP3hM70XK51OEBRR_iaGByhSRujvDo
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: zoolirante-4c01d.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID = zoolirante-4c01d
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET = zoolirante-4c01d.firebasestorage.app
+NEXT_PUBLIC_FIREBASE_MESSAGE_SENDER_ID = 117339403866
+NEXT_PUBLIC_FIREBASE_APP_ID = 1:117339403866:web:5dacbf03911cb91338ca63
+NEXT_PUBLIC_FIREBASE_MESUREMENT_ID = G-19CLCPSBBC
