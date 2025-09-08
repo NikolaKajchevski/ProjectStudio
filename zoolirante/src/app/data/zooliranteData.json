@@ -1,0 +1,457 @@
+{
+  "zoo_info": {
+    "name": "Zoolirante",
+    "location": "Sydney, Australia",
+    "description": "An authentic Italian-inspired zoo experience in the heart of Australia",
+    "opening_hours": {
+      "monday": "9:00 AM - 5:00 PM",
+      "tuesday": "9:00 AM - 5:00 PM",
+      "wednesday": "9:00 AM - 5:00 PM",
+      "thursday": "9:00 AM - 5:00 PM",
+      "friday": "9:00 AM - 6:00 PM",
+      "saturday": "8:00 AM - 6:00 PM",
+      "sunday": "8:00 AM - 6:00 PM"
+    },
+    "contact": {
+      "phone": "+61 2 9555 0123",
+      "email": "info@zoolirante.com.au",
+      "address": "123 Wildlife Avenue, Sydney NSW 2000"
+    }
+  },
+  "animals": [
+    {
+      "id": "001",
+      "name": "Marco",
+      "species": "African Lion",
+      "scientific_name": "Panthera leo",
+      "habitat": "Savanna Plains",
+      "age": 8,
+      "gender": "Male",
+      "description": "Marco is our majestic male lion, known for his impressive mane and gentle nature with his pride.",
+      "fun_facts": [
+        "Can sleep up to 20 hours a day",
+        "His roar can be heard up to 8 kilometers away"
+      ],
+      "feeding_times": ["10:30 AM", "4:00 PM"],
+      "location": {
+        "zone": "African Safari",
+        "coordinates": { "x": 150, "y": 200 }
+      },
+      "conservation_status": "Vulnerable",
+      "image_url": "/images/animals/marco-lion.jpg",
+      "gallery": [
+        "/images/animals/marco-1.jpg",
+        "/images/animals/marco-2.jpg"
+      ]
+    },
+    {
+      "id": "002",
+      "name": "Bella",
+      "species": "Red Kangaroo",
+      "scientific_name": "Osphranter rufus",
+      "habitat": "Australian Outback",
+      "age": 5,
+      "gender": "Female",
+      "description": "Bella is our energetic red kangaroo who loves to show off her impressive jumping skills.",
+      "fun_facts": [
+        "Can hop at speeds up to 60 km/h",
+        "Has a joey in her pouch named Giuseppe"
+      ],
+      "feeding_times": ["9:00 AM", "2:30 PM"],
+      "location": {
+        "zone": "Australian Bush",
+        "coordinates": { "x": 300, "y": 150 }
+      },
+      "conservation_status": "Least Concern",
+      "image_url": "/images/animals/bella-kangaroo.jpg",
+      "gallery": [
+        "/images/animals/bella-1.jpg",
+        "/images/animals/bella-2.jpg"
+      ]
+    },
+    {
+      "id": "003",
+      "name": "Lorenzo",
+      "species": "Emperor Penguin",
+      "scientific_name": "Aptenodytes forsteri",
+      "habitat": "Antarctic Exhibit",
+      "age": 6,
+      "gender": "Male",
+      "description": "Lorenzo waddles with style and is always ready to put on a show for visitors.",
+      "fun_facts": [
+        "Can dive up to 500 meters deep",
+        "Forms lifelong partnerships with mates"
+      ],
+      "feeding_times": ["11:00 AM", "3:00 PM"],
+      "location": {
+        "zone": "Polar Paradise",
+        "coordinates": { "x": 100, "y": 350 }
+      },
+      "conservation_status": "Near Threatened",
+      "image_url": "/images/animals/lorenzo-penguin.jpg",
+      "gallery": [
+        "/images/animals/lorenzo-1.jpg",
+        "/images/animals/lorenzo-2.jpg"
+      ]
+    },
+    {
+      "id": "004",
+      "name": "Sophia",
+      "species": "Giant Panda",
+      "scientific_name": "Ailuropoda melanoleuca",
+      "habitat": "Bamboo Grove",
+      "age": 4,
+      "gender": "Female",
+      "description": "Sophia is our playful panda who spends most of her day munching on bamboo and rolling around.",
+      "fun_facts": [
+        "Eats up to 40 pounds of bamboo daily",
+        "Has a sixth finger that helps grasp bamboo"
+      ],
+      "feeding_times": ["10:00 AM", "1:00 PM", "5:00 PM"],
+      "location": {
+        "zone": "Asian Gardens",
+        "coordinates": { "x": 250, "y": 300 }
+      },
+      "conservation_status": "Vulnerable",
+      "image_url": "/images/animals/sophia-panda.jpg",
+      "gallery": [
+        "/images/animals/sophia-1.jpg",
+        "/images/animals/sophia-2.jpg"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "evt001",
+      "title": "Wild Italy Parade",
+      "description": "Join us for a spectacular parade featuring animals that represent the wildlife of Italy and surrounding regions.",
+      "date": "2024-09-15",
+      "start_time": "2:00 PM",
+      "end_time": "3:30 PM",
+      "location": "Main Pathway",
+      "category": "Parade",
+      "animals_featured": ["001", "003"],
+      "capacity": 200,
+      "current_bookings": 145,
+      "ticket_required": true,
+      "additional_cost": 15.00,
+      "age_restriction": "All ages",
+      "image_url": "/images/events/wild-italy-parade.jpg"
+    },
+    {
+      "id": "evt002",
+      "title": "Penguin Feeding Experience",
+      "description": "Get up close with Lorenzo and learn about penguin behavior while helping with feeding time.",
+      "date": "2024-09-12",
+      "start_time": "11:00 AM",
+      "end_time": "11:45 AM",
+      "location": "Polar Paradise",
+      "category": "Animal Interaction",
+      "animals_featured": ["003"],
+      "capacity": 12,
+      "current_bookings": 8,
+      "ticket_required": true,
+      "additional_cost": 25.00,
+      "age_restriction": "6+",
+      "image_url": "/images/events/penguin-feeding.jpg"
+    },
+    {
+      "id": "evt003",
+      "title": "Panda Photography Workshop",
+      "description": "Learn professional photography techniques while capturing beautiful moments with Sophia the panda.",
+      "date": "2024-09-20",
+      "start_time": "9:30 AM",
+      "end_time": "12:00 PM",
+      "location": "Asian Gardens",
+      "category": "Educational",
+      "animals_featured": ["004"],
+      "capacity": 15,
+      "current_bookings": 3,
+      "ticket_required": true,
+      "additional_cost": 45.00,
+      "age_restriction": "12+",
+      "image_url": "/images/events/panda-photography.jpg"
+    }
+  ],
+  "tickets": {
+    "general_admission": [
+      {
+        "type": "Adult",
+        "price": 35.00,
+        "description": "Full access to all exhibits and shows",
+        "age_range": "13-64"
+      },
+      {
+        "type": "Child",
+        "price": 20.00,
+        "description": "Full access to all exhibits and shows",
+        "age_range": "3-12"
+      },
+      {
+        "type": "Senior",
+        "price": 25.00,
+        "description": "Full access to all exhibits and shows",
+        "age_range": "65+"
+      },
+      {
+        "type": "Family Pass",
+        "price": 95.00,
+        "description": "2 Adults + 2 Children combo ticket",
+        "age_range": "Family of 4"
+      }
+    ],
+    "memberships": [
+      {
+        "type": "Individual",
+        "monthly_price": 25.00,
+        "annual_price": 250.00,
+        "benefits": [
+          "Unlimited zoo entry",
+          "10% discount on merchandise",
+          "15% discount on special events",
+          "Monthly member newsletter",
+          "Priority booking for events"
+        ]
+      },
+      {
+        "type": "Family",
+        "monthly_price": 45.00,
+        "annual_price": 450.00,
+        "benefits": [
+          "Unlimited zoo entry for up to 2 adults + 3 children",
+          "15% discount on merchandise",
+          "20% discount on special events",
+          "Monthly member newsletter",
+          "Priority booking for events",
+          "Exclusive member-only events"
+        ]
+      }
+    ]
+  },
+  "merchandise": [
+    {
+      "id": "merch001",
+      "name": "Marco the Lion Plush Toy",
+      "category": "Plush Toys",
+      "price": 28.00,
+      "description": "Soft and cuddly plush version of our beloved lion Marco",
+      "image_url": "/images/merchandise/marco-plush.jpg",
+      "stock": 45,
+      "featured_animal": "001"
+    },
+    {
+      "id": "merch002",
+      "name": "Zoolirante T-Shirt",
+      "category": "Apparel",
+      "price": 22.00,
+      "description": "Comfortable cotton t-shirt with Zoolirante logo",
+      "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
+      "colors": ["Green", "Blue", "White"],
+      "image_url": "/images/merchandise/zoolirante-tshirt.jpg",
+      "stock": 120
+    },
+    {
+      "id": "merch003",
+      "name": "Australian Wildlife Guide Book",
+      "category": "Books",
+      "price": 18.00,
+      "description": "Comprehensive guide to Australian wildlife with beautiful photographs",
+      "image_url": "/images/merchandise/wildlife-guide.jpg",
+      "stock": 30
+    },
+    {
+      "id": "merch004",
+      "name": "Penguin Information Sheet Set",
+      "category": "Educational",
+      "price": 8.00,
+      "description": "Educational sheets about penguin species around the world",
+      "image_url": "/images/merchandise/penguin-info-sheets.jpg",
+      "stock": 75,
+      "featured_animal": "003"
+    },
+    {
+      "id": "merch005",
+      "name": "Zoolirante Water Bottle",
+      "category": "Accessories",
+      "price": 15.00,
+      "description": "Eco-friendly stainless steel water bottle with zoo branding",
+      "image_url": "/images/merchandise/water-bottle.jpg",
+      "stock": 60
+    }
+  ],
+  "users": [
+    {
+      "id": "user001",
+      "username": "giovanni_rossi",
+      "email": "giovanni.rossi@email.com",
+      "first_name": "Giovanni",
+      "last_name": "Rossi",
+      "date_of_birth": "1985-03-15",
+      "phone": "+61 4 1234 5678",
+      "address": {
+        "street": "45 Collins Street",
+        "city": "Melbourne",
+        "state": "VIC",
+        "postal_code": "3000",
+        "country": "Australia"
+      },
+      "membership": {
+        "type": "Individual",
+        "status": "Active",
+        "start_date": "2024-01-15",
+        "expiry_date": "2025-01-15"
+      },
+      "favorite_animals": ["001", "004"],
+      "saved_payment_methods": [
+        {
+          "id": "pm001",
+          "type": "Credit Card",
+          "last_four": "4532",
+          "expiry": "12/26",
+          "is_default": true
+        }
+      ],
+      "visit_history": [
+        {
+          "date": "2024-08-20",
+          "ticket_type": "Member Entry",
+          "special_events": ["evt002"]
+        },
+        {
+          "date": "2024-07-10",
+          "ticket_type": "Member Entry",
+          "special_events": []
+        }
+      ],
+      "purchase_history": [
+        {
+          "date": "2024-08-20",
+          "items": [
+            {
+              "item_id": "merch001",
+              "quantity": 1,
+              "price": 28.00
+            }
+          ],
+          "total": 28.00
+        }
+      ]
+    }
+  ],
+  "zoo_map": {
+    "zones": [
+      {
+        "id": "african_safari",
+        "name": "African Safari",
+        "color": "#D2691E",
+        "description": "Experience the wild beauty of African wildlife",
+        "coordinates": {
+          "x": 100,
+          "y": 150,
+          "width": 150,
+          "height": 100
+        },
+        "animals": ["001"],
+        "facilities": ["Restaurant", "Gift Shop", "Restrooms"]
+      },
+      {
+        "id": "australian_bush",
+        "name": "Australian Bush",
+        "color": "#228B22",
+        "description": "Discover native Australian animals in their natural habitat",
+        "coordinates": {
+          "x": 250,
+          "y": 100,
+          "width": 120,
+          "height": 120
+        },
+        "animals": ["002"],
+        "facilities": ["Picnic Area", "Information Center"]
+      },
+      {
+        "id": "polar_paradise",
+        "name": "Polar Paradise",
+        "color": "#87CEEB",
+        "description": "Step into the icy world of polar animals",
+        "coordinates": {
+          "x": 50,
+          "y": 300,
+          "width": 100,
+          "height": 80
+        },
+        "animals": ["003"],
+        "facilities": ["Viewing Platform", "Cafe"]
+      },
+      {
+        "id": "asian_gardens",
+        "name": "Asian Gardens",
+        "color": "#DC143C",
+        "description": "Peaceful Asian-inspired gardens with bamboo groves",
+        "coordinates": {
+          "x": 200,
+          "y": 250,
+          "width": 130,
+          "height": 110
+        },
+        "animals": ["004"],
+        "facilities": ["Meditation Garden", "Tea House", "Souvenir Shop"]
+      }
+    ],
+    "pathways": [
+      {
+        "from": "entrance",
+        "to": "african_safari",
+        "distance": 200
+      },
+      {
+        "from": "african_safari",
+        "to": "australian_bush",
+        "distance": 150
+      },
+      {
+        "from": "australian_bush",
+        "to": "asian_gardens",
+        "distance": 100
+      },
+      {
+        "from": "polar_paradise",
+        "to": "asian_gardens",
+        "distance": 180
+      }
+    ],
+    "facilities": {
+      "entrance": { "x": 200, "y": 50 },
+      "main_restaurant": { "x": 180, "y": 180 },
+      "first_aid": { "x": 160, "y": 200 },
+      "parking": { "x": 200, "y": 20 }
+    }
+  },
+  "staff_roles": [
+    {
+      "role": "Zoo Manager",
+      "permissions": [
+        "create_events",
+        "edit_events",
+        "delete_events",
+        "manage_animals",
+        "view_analytics",
+        "manage_staff"
+      ]
+    },
+    {
+      "role": "Event Coordinator",
+      "permissions": [
+        "create_events",
+        "edit_events",
+        "view_bookings"
+      ]
+    },
+    {
+      "role": "Animal Keeper",
+      "permissions": [
+        "update_animal_info",
+        "view_animals"
+      ]
+    }
+  ]
+}

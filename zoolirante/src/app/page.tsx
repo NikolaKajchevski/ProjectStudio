@@ -25,7 +25,7 @@ export default function Home() {
 
             {/* Nav bar that can be clicked on to go to other pages */}
             <nav className="hidden md:flex space-x-8">
-              <a href="#" className="text-gray-600 hover:text-gray-900 font-medium">Animals</a>
+              <a href="/animals" className="text-gray-600 hover:text-gray-900 font-medium">Animals</a>
               <a href="#" className="text-gray-600 hover:text-gray-900 font-medium">Experiences</a>
               <a href="#" className="text-gray-600 hover:text-gray-900 font-medium">Tickets</a>
               <a href="#" className="text-gray-600 hover:text-gray-900 font-medium">Membership</a>
