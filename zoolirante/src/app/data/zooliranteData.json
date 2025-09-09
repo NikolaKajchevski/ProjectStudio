@@ -18,6 +18,9 @@
       "address": "123 Wildlife Avenue, Sydney NSW 2000"
     }
   },
+  "eventsData": {
+
+  },
   "animals": [
     {
       "id": "001",
