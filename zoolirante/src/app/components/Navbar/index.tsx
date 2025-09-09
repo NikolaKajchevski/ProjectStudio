@@ -25,7 +25,7 @@ export default function Navbar() {
             <Link href="/animals" className="text-gray-600 hover:text-gray-900 font-medium">Animals</Link>
             <Link href="#" className="text-gray-600 hover:text-gray-900 font-medium">Map</Link>
             <Link href="#" className="text-gray-600 hover:text-gray-900 font-medium">Shop</Link>
-            <Link href="#" className="text-gray-600 hover:text-gray-900 font-medium">Tickets</Link>
+            <Link href="#" className="text-gray-600 hover:text-gray-900 font-medium">Events</Link>
             <Link href="#" className="text-gray-600 hover:text-gray-900 font-medium">Membership</Link>
             <Link href="#" className="text-gray-600 hover:text-gray-900 font-medium">About Us</Link>
           </nav>
