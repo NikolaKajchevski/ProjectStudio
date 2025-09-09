@@ -9,7 +9,7 @@ export default function Map() {
         <div className="w-full aspect-video rounded-2xl shadow-lg overflow-hidden">
           <iframe
             loading="lazy"
-            src="https://www.canva.com/design/DAGyRU8ZMAg/oSfNM4lcG89WaGBCSHXGbA/view?embed"
+            src="https://www.canva.com/design/DAGyRU8ZMAg/h9gACu8JO5jrk1sXS6J2Xg/view?embed"
             title="Zoo Map"
             className="w-full h-full border-0"
             allowFullScreen
