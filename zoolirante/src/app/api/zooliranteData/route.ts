@@ -32,29 +32,29 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export async function POST(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-    try {
-    const data = req.body
-    const jsonData = await fsPromises.readFile("../../data/zooliranteData");
-    const objectData = JSON.parse(jsonData.toString());
+// export async function POST(
+//   req: NextApiRequest,
+//   res: NextApiResponse
+// ) {
+//     try {
+//     const data = req.body
+//     const jsonData = await fsPromises.readFile("../../data/zooliranteData");
+//     const objectData = JSON.parse(jsonData.toString());
     
-    const { first, second  } = data;
+//     const { first, second  } = data;
     
-    const newData = {
-      first,
-      second
-    } 
+//     const newData = {
+//       first,
+//       second
+//     } 
 
-    objectData.push(newData);
+//     objectData.push(newData);
 
-    const updatedData = JSON.stringify(objectData);
-    await fsPromises.writeFile("../../data/zooliranteData", updatedData);
-    res.status(200).json({message: 'stored data'})
-  } catch(error) {
-    res.status(500).json({message: 'Error storing'})
-  }
-}
+//     const updatedData = JSON.stringify(objectData);
+//     await fsPromises.writeFile("../../data/zooliranteData", updatedData);
+//     res.status(200).json({message: 'stored data'})
+//   } catch(error) {
+//     res.status(500).json({message: 'Error storing'})
+//   }
+// }
 
