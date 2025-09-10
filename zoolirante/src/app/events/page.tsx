@@ -31,12 +31,20 @@ export default async function EventsPage() {
                       <h2 className="text-3xl font-bold mb-2">
                         {events.title}
                       </h2>
-                      <h2 className="border border-orange-500 font-bold text-orange-500 px-3 py-2 rounded-full text-sm">
+                      <h2 className="border border-orange-500 font-bold text-orange-500 px-3 py-1 rounded-full text-sm">
                         {events.category}
                       </h2>
                   </div>
-                  <p className="text-gray-600 mb-2 font-bold">
-                    {events.date} | {events.start_time} - {events.end_time}
+                  <div className="flex justify-between items-center">
+                    <p className="text-gray-600 font-bold mb-2">
+                      {events.date} | {events.start_time} - {events.end_time}
+                    </p>
+                    <p className="border border-orange-500 font-bold text-orange-500 px-2 py-1 rounded-full text-sm hover:bg-orange-600 transition-colors">
+                      {events.age_restriction}
+                    </p>
+                  </div>
+                  <p className="text-gray-600 font-bold mb-2">
+                    {events.location}
                   </p>
                   <p className="text-sm text-gray-500 mb-2">
                     {events.description}
