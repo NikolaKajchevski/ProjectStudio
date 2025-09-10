@@ -21,105 +21,133 @@
   "animals": [
     {
       "id": "001",
-      "name": "Marco",
+      "name": "Oscar",
+      "species": "Common Ostrich",
+      "scientific_name": "Struthio camelus",
+      "habitat": "Savanna Plains",
+      "age": 7,
+      "gender": "Male",
+      "description": "Oscar is our tall and speedy ostrich, famous for his impressive running skills and curious nature.",
+      "fun_facts": [
+        "Can run up to 70 km/h",
+        "Has the largest eyes of any land animal"
+      ],
+      "feeding_times": ["9:30 AM", "3:30 PM"],
+      "location": {
+        "zone": "African Safari",
+        "coordinates": { "x": 150, "y": 200 }
+      },
+      "conservation_status": "Least Concern",
+      "image_url": "/images/animals/oscar-ostrich.jpg",
+      "gallery": [
+        "/images/animals/oscar-1.jpg",
+        "/images/animals/oscar-2.jpg"
+      ]
+    },
+    {
+      "id": "002",
+      "name": "Leo",
       "species": "African Lion",
       "scientific_name": "Panthera leo",
       "habitat": "Savanna Plains",
       "age": 8,
       "gender": "Male",
-      "description": "Marco is our majestic male lion, known for his impressive mane and gentle nature with his pride.",
+      "description": "Leo is our majestic male lion with a magnificent mane and a calm, regal presence.",
       "fun_facts": [
-        "Can sleep up to 20 hours a day",
-        "His roar can be heard up to 8 kilometers away"
+        "Roar can be heard up to 8 km away",
+        "Lives in prides of up to 15 lions"
       ],
       "feeding_times": ["10:30 AM", "4:00 PM"],
       "location": {
         "zone": "African Safari",
-        "coordinates": { "x": 150, "y": 200 }
-      },
-      "conservation_status": "Vulnerable",
-      "image_url": "/images/animals/marco-lion.jpg",
-      "gallery": [
-        "/images/animals/marco-1.jpg",
-        "/images/animals/marco-2.jpg"
-      ]
-    },
-    {
-      "id": "002",
-      "name": "Bella",
-      "species": "Red Kangaroo",
-      "scientific_name": "Osphranter rufus",
-      "habitat": "Australian Outback",
-      "age": 5,
-      "gender": "Female",
-      "description": "Bella is our energetic red kangaroo who loves to show off her impressive jumping skills.",
-      "fun_facts": [
-        "Can hop at speeds up to 60 km/h",
-        "Has a joey in her pouch named Giuseppe"
-      ],
-      "feeding_times": ["9:00 AM", "2:30 PM"],
-      "location": {
-        "zone": "Australian Bush",
         "coordinates": { "x": 300, "y": 150 }
       },
-      "conservation_status": "Least Concern",
-      "image_url": "/images/animals/bella-kangaroo.jpg",
+      "conservation_status": "Vulnerable",
+      "image_url": "/images/animals/leo-lion.jpg",
       "gallery": [
-        "/images/animals/bella-1.jpg",
-        "/images/animals/bella-2.jpg"
+        "/images/animals/leo-1.jpg",
+        "/images/animals/leo-2.jpg"
       ]
     },
     {
       "id": "003",
-      "name": "Lorenzo",
-      "species": "Emperor Penguin",
-      "scientific_name": "Aptenodytes forsteri",
-      "habitat": "Antarctic Exhibit",
-      "age": 6,
-      "gender": "Male",
-      "description": "Lorenzo waddles with style and is always ready to put on a show for visitors.",
+      "name": "Anya",
+      "species": "Impala Antelope",
+      "scientific_name": "Aepyceros melampus",
+      "habitat": "Grasslands",
+      "age": 5,
+      "gender": "Female",
+      "description": "Anya is a graceful antelope known for her speed and elegant leaps across the grasslands.",
       "fun_facts": [
-        "Can dive up to 500 meters deep",
-        "Forms lifelong partnerships with mates"
+        "Can leap up to 3 meters high",
+        "Can run up to 80 km/h"
       ],
-      "feeding_times": ["11:00 AM", "3:00 PM"],
+      "feeding_times": ["9:00 AM", "2:00 PM"],
       "location": {
-        "zone": "Polar Paradise",
+        "zone": "Savanna Plains",
         "coordinates": { "x": 100, "y": 350 }
       },
-      "conservation_status": "Near Threatened",
-      "image_url": "/images/animals/lorenzo-penguin.jpg",
+      "conservation_status": "Least Concern",
+      "image_url": "/images/animals/anya-antelope.jpg",
       "gallery": [
-        "/images/animals/lorenzo-1.jpg",
-        "/images/animals/lorenzo-2.jpg"
+        "/images/animals/anya-1.jpg",
+        "/images/animals/anya-2.jpg"
       ]
     },
     {
       "id": "004",
-      "name": "Sophia",
-      "species": "Giant Panda",
-      "scientific_name": "Ailuropoda melanoleuca",
-      "habitat": "Bamboo Grove",
-      "age": 4,
+      "name": "Amelia",
+      "species": "Giant Anteater",
+      "scientific_name": "Myrmecophaga tridactyla",
+      "habitat": "Tropical Forests",
+      "age": 6,
       "gender": "Female",
-      "description": "Sophia is our playful panda who spends most of her day munching on bamboo and rolling around.",
+      "description": "Amelia is our curious anteater who spends her day searching for ants and termites with her long snout.",
       "fun_facts": [
-        "Eats up to 40 pounds of bamboo daily",
-        "Has a sixth finger that helps grasp bamboo"
+        "Can eat up to 30,000 insects a day",
+        "Has a tongue up to 60 cm long"
       ],
-      "feeding_times": ["10:00 AM", "1:00 PM", "5:00 PM"],
+      "feeding_times": ["10:00 AM", "1:30 PM", "4:30 PM"],
       "location": {
-        "zone": "Asian Gardens",
+        "zone": "South American Rainforest",
         "coordinates": { "x": 250, "y": 300 }
       },
       "conservation_status": "Vulnerable",
-      "image_url": "/images/animals/sophia-panda.jpg",
+      "image_url": "/images/animals/amelia-anteater.jpg",
       "gallery": [
-        "/images/animals/sophia-1.jpg",
-        "/images/animals/sophia-2.jpg"
+        "/images/animals/amelia-1.jpg",
+        "/images/animals/amelia-2.jpg"
       ]
-    }
-  ],
+  },
+  {
+    "id": "005",
+    "name": "Gorilla George",
+    "species": "Western Lowland Gorilla",
+    "scientific_name": "Gorilla gorilla gorilla",
+    "habitat": "Tropical Forests",
+    "age": 12,
+    "gender": "Male",
+    "description": "George is a gentle giant gorilla who enjoys climbing, foraging, and interacting with his group.",
+    "fun_facts": [
+      "Can lift over 10 times his body weight",
+      "Communicates with a variety of vocalizations and gestures"
+    ],
+    "feeding_times": ["9:30 AM", "12:30 PM", "3:30 PM"],
+    "location": {
+      "zone": "African Jungle",
+      "coordinates": { "x": 180, "y": 250 }
+    },
+    "conservation_status": "Critically Endangered",
+    "image_url": "/images/animals/george-gorilla.jpg",
+    "gallery": [
+      "/images/animals/george-1.jpg",
+      "/images/animals/george-2.jpg"
+    ]
+  }
+],
+
+    
+
   "events": [
     {
       "id": "evt001",
