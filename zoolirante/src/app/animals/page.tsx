@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 export default async function AnimalsPage() {
   const data = await fetch('http://localhost:3000/api/zooliranteData', {
+    next: { revalidate: 0 },
     cache: 'no-store'
   });
   const zooData = await data.json();
