@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Button from "./components/Button";
 import { ImageSlider } from "./components/ImageSlider";
+import Link from "next/link";
 
 
 
@@ -34,9 +35,9 @@ export default function Home() {
                   </div>
                 </div>
                 <div style = {{width: '80%', height: '50%'}}  >
-                <button className="bg-orange-500 text-white px-20 py-3 rounded-full text-sm hover:bg-orange-600 transition-colors" style = {{ marginLeft:'50%', marginTop: '25%', textAlign: "center"}}>
+                <Link href="/shop" className="bg-orange-500 text-white px-20 py-3 rounded-full text-sm hover:bg-orange-600 transition-colors" style = {{ marginLeft:'50%', marginTop: '50%', textAlign: "center"}}>
                   Shop Now!
-                </button>
+                </Link>
                 </div>
               </div>
               
