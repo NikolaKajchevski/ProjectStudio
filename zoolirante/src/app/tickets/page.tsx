@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function AnimalsPage() {
+export default function TicketPage() {
   return (
     <div className="min-h-screen bg-gray-200">
     
