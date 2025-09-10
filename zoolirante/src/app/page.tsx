@@ -1,7 +1,10 @@
 import Image from "next/image";
 import Button from "./components/Button";
+import { ImageSlider } from "./components/ImageSlider";
 
 
+
+const IMAGES = ['/zoolirante-logo.png', '/window.svg', '/file.svg']
 
 export default function Home() {
   return (
@@ -38,9 +41,9 @@ export default function Home() {
                 priority
               />
             <main>
-              <Button handleClick={() => console.log("test") }>
-                click me
-              </Button>
+              <div style = {{maxWidth: '1200px', width: '100%', height: '500px', margin: '0 auto'}}>
+              <ImageSlider imageUrls={IMAGES}/>
+              </div>
             </main>
             <button className="next bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors">{'\u2192'}</button>
             </div>
