@@ -24,7 +24,7 @@ export default function Navbar() {
           <nav className="hidden md:flex space-x-8">
             <Link href="/animals" className="text-gray-600 hover:text-gray-900 font-medium">Animals</Link>
             <Link href="/map" className="text-gray-600 hover:text-gray-900 font-medium">Map</Link>
-            <Link href="#" className="text-gray-600 hover:text-gray-900 font-medium">Shop</Link>
+            <Link href="/shop" className="text-gray-600 hover:text-gray-900 font-medium">Shop</Link>
             <Link href="#" className="text-gray-600 hover:text-gray-900 font-medium">Tickets</Link>
             <Link href="#" className="text-gray-600 hover:text-gray-900 font-medium">Membership</Link>
             <Link href="#" className="text-gray-600 hover:text-gray-900 font-medium">About Us</Link>
