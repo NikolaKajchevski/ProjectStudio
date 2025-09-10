@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function AnimalsPage() {
   return (
     <div className="min-h-screen bg-gray-200">
@@ -28,9 +30,13 @@ export default function AnimalsPage() {
                 <span className="text-sm font-medium text-orange-500">
                     Prices from $19.99 AUD
                 </span>
-                <button className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors">
-                Book Now!
-                </button>
+                
+                <Link href="/tickets/book">
+                    <button className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors">
+                        Book Now!
+                    </button>
+                </Link>
+                
             </div> 
         </div>
         
