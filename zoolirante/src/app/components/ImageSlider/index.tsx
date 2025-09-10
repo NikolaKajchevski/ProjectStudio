@@ -1,8 +1,7 @@
 "use client"
 import { useState } from "react"
 
-import Image from "next/image";
-
+import "./image-slider.css"
 
 
 type ImageSliderProps = {
@@ -28,19 +27,23 @@ export function ImageSlider({imageUrls}:ImageSliderProps){
             return index-1
         })
     }
+ //overflow: "hidden"
+    return  <div style = {{width:'50%', height: "50%", position: "relative", overflow: "hidden"}}>
 
-    return <div>
-        <div style = {{width:'50%', height: "50%", position: "relative"}}>
-                      <Image
-                        src={imageUrls[imageIndex]}
-                        alt="image 2"
-                        className="slide"
-                        width={200}
-                        height={200}
-                        priority
-                      />
-        <button onClick={prevImage} className="next bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors">{'\u2190'}</button>
-        <button onClick={nextImage} className="next bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors">{'\u2192'}</button>
+        
+      
+
+        <div style={{width:'100%', height: "100%", display: "flex"} } >
+            <div>
+                <img src={imageUrls[imageIndex]}className="img-slider-img"/>
+                <button onClick={prevImage} style={{left:0}} className="next bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors img-slider-btn">{'\u2190'}</button>
+                <button onClick={nextImage} style={{right:0}} className="next bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors img-slider-btn">{'\u2192'}</button>
+            </div>
+            {imageUrls.map(url => (
+            <img key={url} src= {url} className="img-slider-img" style={{translate: `${-100 * imageIndex}%`  }} />
+            ))}
         </div>
+    
     </div>
+
 }

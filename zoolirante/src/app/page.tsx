@@ -16,36 +16,13 @@ export default function Home() {
         <div className = "slider">
           <div className="slides">
 
-              <Image
-                src="/zoolirante-logo.png"
-                alt="image 1"
-                className="slide"
-                width={60}
-                height={20}
-                priority
-              />
-              <Image
-                src="/window.svg"
-                alt="image 2"
-                className="slide"
-                width={60}
-                height={20}
-                priority
-              />
-              <Image
-                src="/file.svg"
-                alt="image 3"
-                className="slide"
-                width={60}
-                height={20}
-                priority
-              />
+
+
             <main>
-              <div style = {{maxWidth: '1200px', width: '100%', height: '500px', margin: '0 auto'}}>
+              <div style = {{maxHeight: '600px', width: '600px', height: '600px', margin: '0 auto'}}>
               <ImageSlider imageUrls={IMAGES}/>
               </div>
             </main>
-            <button className="next bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors">{'\u2192'}</button>
             </div>
         </div>
 
