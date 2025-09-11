@@ -27,8 +27,8 @@ export default function Navbar() {
             <Link href="/events" className="text-gray-600 hover:text-gray-900 font-medium">Events</Link>
             <Link href="/shop" className="text-gray-600 hover:text-gray-900 font-medium">Shop</Link>
             <Link href="/tickets" className="text-gray-600 hover:text-gray-900 font-medium">Tickets</Link>
-            <Link href="#" className="text-gray-600 hover:text-gray-900 font-medium">Membership</Link>
-            <Link href="#" className="text-gray-600 hover:text-gray-900 font-medium">About Us</Link>
+            <Link href="/membership" className="text-gray-600 hover:text-gray-900 font-medium">Membership</Link>
+            <Link href="/aboutUS" className="text-gray-600 hover:text-gray-900 font-medium">About Us</Link>
           </nav>
           
           {/* Buttons to purchase tickets and for a login */}
