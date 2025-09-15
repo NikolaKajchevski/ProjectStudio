@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default async function EventsPage() {
   const data = await fetch('http://localhost:3000/api/zooliranteData', {
@@ -7,7 +8,18 @@ export default async function EventsPage() {
   const zooData = await data.json();
 
   return (
-    <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-3 py-3">
+    <div className="min-h-screen">
+        <section className="relative h-96 bg-cover bg-center bg-no-repeat flex items-center justify-center text-white" 
+               style={{backgroundImage: "url('https://images4.alphacoders.com/783/783592.jpg')"}}>
+        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="relative z-10 text-center px-4">
+          <h1 className="text-5xl font-bold mb-4">Events</h1>
+          <p className="text-xl mb-6">
+            View and Sign-Up for current and upcoming events at Zoolirante!
+          </p>
+        </div>
+      </section>
+      <div className="max-w-7xl mx-auto">
       <div className="bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <h1 className="text-4xl text-black-500 text-center font-bold">Upcoming Events</h1>
@@ -57,23 +69,32 @@ export default async function EventsPage() {
                         for (var i = 0; i < zooData.animals.length; i++) {
                           if (zooData.animals[i].id == Element) {
                             return (
+                                    <Link 
+                                      href={`/animals/${zooData.animals[i].id}`}
+                                      className="border border-orange-500 font-bold text-orange-500 px-12 py-1 rounded-full text-sm hover:bg-orange-600 transition-colors"
+                                    >
+                                      {zooData.animals[i].name}
+                                    </Link>
                               // have this link to the animals page when ready
-                              <button key={zooData.animals[i].id} className="border border-orange-500 font-bold text-orange-500 px-2 py-1 rounded-full text-sm hover:bg-orange-600 transition-colors">
-                                {zooData.animals[i].name}
-                              </button>
+                                // <button key={zooData.animals[i].id} className="border border-orange-500 font-bold text-orange-500 px-2 py-1 rounded-full text-sm hover:bg-orange-600 transition-colors">
+                                //   {zooData.animals[i].name}
+                                // </button>
                             )
                           }
                         }
                     })}
                   </div>
-                  <button className="bg-orange-500 font-bold text-white px-5 py-3 rounded-full text-sm hover:bg-orange-600 transition-colors">
-                    Book Now
-                  </button>
+                  <Link href="/tickets/book">
+                    <button className="bg-orange-500 font-bold text-white px-5 py-3 rounded-full text-sm hover:bg-orange-600 transition-colors">
+                      Book Now
+                    </button>
+                  </Link>
                 </div>
-              </div>
+              </div>  
             ))}
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
