@@ -95,7 +95,7 @@ export default async function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {zooData.events.map((events: any) => (
-              <div className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+              <div key={events.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
                 <div className="text-orange-500 text-1x2 font-semibold mb-2">
                   {events.category}
                 </div>
