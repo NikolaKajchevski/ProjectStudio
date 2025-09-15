@@ -6,10 +6,16 @@ import path from 'path';
 
 export async function GET(request: NextRequest) {
   try {
+
+    
     const searchParams = request.nextUrl.searchParams;
     const id = searchParams.get('id');
+    console.log('test')
+
 
     if (id) {
+      
+    console.log(id)
       // Find the specific animal
       const animal = zooliranteData.animals.find(animal => animal.id === id);
       
@@ -20,6 +26,16 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ animals: [animal] });
     }
 
+
+      if (id) {
+      const merch = zooliranteData.merchandise.find(merch => merch.id === id);
+      
+      if (!merch) {
+        return NextResponse.json({ error: 'Merchandise not found' }, { status: 404 });
+      }
+
+      return NextResponse.json({ merchandise: [merch] });
+    }
 
     // Copy the method above if you need to query data using a different varible
 
