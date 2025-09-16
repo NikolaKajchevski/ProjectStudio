@@ -1,4 +1,13 @@
+import Link from "next/link";
+
 export default function TicketBooking() {
+
+    const tickets = [
+        {id: "standard", name: "Standard Pass", price: 19.99, description: "A full-day pass suitable for anyone."},
+        {id: "child", name: "Child Ticket (12 and under)", price: 12.99, description: "Bring the little ones along!"},
+        {id: "concession", name: "Concession Ticket", price: 15.99, description: "Concession card required."},
+        {id: "membership", name: "Membership", price: 70, description: "Student card required."}
+    ];
   return (
     <div className="min-h-screen bg-gray-200">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -7,71 +16,25 @@ export default function TicketBooking() {
     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
 
         {/* Left Column: Ticket cards */}
-        {/* TODO: MIGHT CHANGE THESE TO A FOR EACH LOOP */}
+
         <div className="md:col-span-7 space-y-6">
-            {/* Standard Pass */}
-            <div className="p-4 border border-gray-300 bg-white rounded-lg">
-                <h2 className="text-xl font-bold mb-2 text-orange-500">Standard Pass</h2>
-                <p className="text-gray-600 mb-2">
-                    A full-day pass suitable for anyone.
-                </p>
-                <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium text-orange-500">$19.99 AUD</span>
-                    <input
-                        type="number"
-                        min={0}
-                        defaultValue={0}
-                        className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors"
-                    />
-                </div>
-            </div>
 
-            {/* Child Pass */}
-            <div className="p-4 border border-gray-300 bg-white rounded-lg">
-                <h2 className="text-xl font-bold mb-2 text-orange-500">Child Ticket (12 and under)</h2>
-                <p className="text-gray-600 mb-2">
-                    Bring the little ones along!
-                </p>
-                <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium text-orange-500">$9.99 AUD</span>
-                    <input
-                        type="number"
-                        min={0}
-                        defaultValue={0}
-                        className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors"
-                    />
+            {tickets.map(ticket => (
+                <div key={ticket.id} className="p-4 border border-gray-300 bg-white rounded-lg">
+                    <h2 className="text-xl font-bold mb-2 text-orange-500">{ticket.name}</h2>
+                    <p className="text-gray-600 mb-2">{ticket.description}</p>
+                    
+                    <div className="flex justify-between items-center">
+                        <span className="text-sm font-medium text-orange-500">${ticket.price} AUD</span>
+                        <input
+                            type="number"
+                            min={0}
+                            defaultValue={0}
+                            className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors"
+                        />
+                    </div>
                 </div>
-            </div>
-
-            {/* Concession Pass */}
-            <div className="p-4 border border-gray-300 bg-white rounded-lg">
-                <h2 className="text-xl font-bold mb-2 text-orange-500">Concession Ticket</h2>
-                <p className="text-gray-600 mb-2">Concession card required.</p>
-                <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium text-orange-500">$15.99 AUD</span>
-                    <input
-                        type="number"
-                        min={0}
-                        defaultValue={0}
-                        className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors"
-                    />                
-                </div>
-            </div>
-
-            {/* Student Pass */}
-            <div className="p-4 border border-gray-300 bg-white rounded-lg">
-                <h2 className="text-xl font-bold mb-2 text-orange-500">Student Ticket</h2>
-                <p className="text-gray-600 mb-2">Full-time student ID required.</p>
-                <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium text-orange-500">$15.99 AUD</span>
-                    <input
-                        type="number"
-                        min={0}
-                        defaultValue={0}
-                        className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors"
-                    />                
-                </div>
-            </div>
+            ))}
         </div>
 
         {/* Right Column: Form */}
@@ -165,9 +128,32 @@ export default function TicketBooking() {
                     Save my details </label>
             </div>
 
-        <button className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors w-full">
-            Proceed
-        </button>
+        {/* Order Summary */}
+            <div className="space-y-1">
+
+                <h2 className="font-bold">Order Summary</h2>
+
+                <div className="flex justify-between">
+                    <span>1 Year Zoolirante Membership</span>
+                    <span>$ AUD</span>
+                </div>
+            
+                <div className="flex justify-between">
+                    <span>GST</span>
+                    <span>$ AUD</span>
+                </div>
+                
+                <div className="flex justify-between font-bold">
+                    <span>Total Cost</span>
+                    <span>$ AUD</span>
+                </div>
+            </div>
+
+        <Link href="ticket/book/confirmation">
+            <button className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors w-full">
+                Confirm
+            </button>
+        </Link>
       </div>
     </div>
   </div>
