@@ -70,6 +70,7 @@ export default function AdminPanel() {
       {/* Dynamic form */}
       <div className="mt-6 p-4 border rounded">
         {activeType === "animal" && <AnimalForm item={selectedItem} />}
+        {activeType === "event" && <EventForm item={selectedItem} />}
       </div>
     </div>
   );
@@ -154,13 +155,79 @@ function AnimalForm({ item }: { item: any }) {
 
       <input name="fun_facts" value={form.fun_facts} placeholder="Fun Facts (comma separated)" onChange={handleChange} className="border p-2 w-full" />
       <input name="image_url" value={form.image_url} placeholder="Image URL" onChange={handleChange} className="border p-2 w-full" />
-      <input name="gallery" value={form.gallery} placeholder="Gallery URLs (comma separated)" onChange={handleChange} className="border p-2 w-full" />
-
+          <input name="gallery" value={form.gallery} placeholder="Gallery URLs (comma separated)" onChange={handleChange} className="border p-2 w-full" />
+    
           <button type="submit" className="bg-green-600 text-black px-4 py-2 rounded">{item ? "Update Animal" : "Add Animal"}</button>
         </form>
       );
     }
-
+    
+    // --------------------
+    // Event Form
+    function EventForm({ item }: { item: any }) {
+      const [form, setForm] = useState(
+        item || {
+          title: "",
+          description: "",
+          date: "",
+          start_time: "",
+          end_time: "",
+          location: "",
+          category: "",
+          animals_featured: "",
+          capacity: "",
+          ticket_required: false,
+          additional_cost: "",
+          age_restriction: "",
+          image_url: "",
+        }
+      );
+    
+      const locations = Array.from(new Set(data.events.map((e) => e.location)));
+      const categories = Array.from(new Set(data.events.map((e) => e.category)));
+    
+      const handleChange = (e: any) => {
+        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
+        setForm({ ...form, [e.target.name]: value });
+      };
+    
+      const handleSubmit = (e: any) => {
+        e.preventDefault();
+        console.log("Submitting Event:", form);
+      };
+    
+      return (
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <h2 className="font-bold text-xl mb-2">{item ? "Edit Event" : "Add Event"}</h2>
+          <input name="title" value={form.title} placeholder="Title" onChange={handleChange} className="border p-2 w-full" />
+          <textarea name="description" value={form.description} placeholder="Description" onChange={handleChange} className="border p-2 w-full" />
+          <input name="date" type="date" value={form.date} onChange={handleChange} className="border p-2 w-full" />
+          <input name="start_time" type="time" value={form.start_time} onChange={handleChange} className="border p-2 w-full" />
+          <input name="end_time" type="time" value={form.end_time} onChange={handleChange} className="border p-2 w-full" />
+    
+          <select name="location" value={form.location} onChange={handleChange} className="border p-2 w-full">
+            <option value="">Select Location</option>
+            {locations.map((l) => <option key={l} value={l}>{l}</option>)}
+          </select>
+    
+          <select name="category" value={form.category} onChange={handleChange} className="border p-2 w-full">
+            <option value="">Select Category</option>
+            {categories.map((c) => <option key={c} value={c}>{c}</option>)}
+          </select>
+    
+          <input name="capacity" type="number" value={form.capacity} placeholder="Capacity" onChange={handleChange} className="border p-2 w-full" />
+          <label>
+            <input name="ticket_required" type="checkbox" checked={form.ticket_required} onChange={handleChange} /> Ticket Required
+          </label>
+          <input name="additional_cost" type="number" value={form.additional_cost} placeholder="Additional Cost" onChange={handleChange} className="border p-2 w-full" />
+          <input name="age_restriction" value={form.age_restriction} placeholder="Age Restriction" onChange={handleChange} className="border p-2 w-full" />
+          <input name="animals_featured" value={form.animals_featured} placeholder="Featured Animal IDs (comma separated)" onChange={handleChange} className="border p-2 w-full" />
+          <input name="image_url" value={form.image_url} placeholder="Image URL" onChange={handleChange} className="border p-2 w-full" />
+    
+          <button type="submit" className="bg-green-600 text-black px-4 py-2 rounded">{item ? "Update Event" : "Add Event"}</button>
+        </form>
+      );
+    }
 
 
 
