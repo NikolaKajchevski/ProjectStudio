@@ -71,7 +71,8 @@ export default async function EventsPage() {
                         for (var i = 0; i < zooData.animals.length; i++) {
                           if (zooData.animals[i].id == Element) {
                             return (
-                                    <Link 
+                                    <Link
+                                      key={zooData.animals[i].id} 
                                       href={`/animals/${zooData.animals[i].id}`}
                                       className="text-center border border-orange-500 font-bold text-orange-500 px-2 py-1 rounded-full text-sm hover:bg-orange-600 transition-colors"
                                     >
