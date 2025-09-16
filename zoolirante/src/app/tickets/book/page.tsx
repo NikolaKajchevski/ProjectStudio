@@ -1,13 +1,34 @@
+"use client";
 import Link from "next/link";
+import { useState } from "react";
+
 
 export default function TicketBooking() {
+
+    const GST = 0.10;
 
     const tickets = [
         {id: "standard", name: "Standard Pass", price: 19.99, description: "A full-day pass suitable for anyone."},
         {id: "child", name: "Child Ticket (12 and under)", price: 12.99, description: "Bring the little ones along!"},
         {id: "concession", name: "Concession Ticket", price: 15.99, description: "Concession card required."},
-        {id: "membership", name: "Membership", price: 70, description: "Student card required."}
+        {id: "student", name: "Student Ticket", price: 15.99, description: "Student card required."}
     ];
+
+    const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
+
+    const handleQuantityChange = (id: string, value: string) => {
+        setQuantities(prev => ({
+        ...prev,
+        [id]: Math.max(0, Number(value)) // avoid negative numbers
+        }));
+    };
+
+    const totalCost = tickets.reduce(
+        (sum, ticket) => sum + (quantities[ticket.id] || 0) * ticket.price, 0
+    );
+
+    const totalCostIncludingGST = totalCost + (totalCost * GST);
+       
   return (
     <div className="min-h-screen bg-gray-200">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -30,6 +51,8 @@ export default function TicketBooking() {
                             type="number"
                             min={0}
                             defaultValue={0}
+                            value={quantities[ticket.id] || 0}
+                            onChange={e => handleQuantityChange(ticket.id, e.target.value)}
                             className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors"
                         />
                     </div>
@@ -133,19 +156,25 @@ export default function TicketBooking() {
 
                 <h2 className="font-bold">Order Summary</h2>
 
-                <div className="flex justify-between">
-                    <span>1 Year Zoolirante Membership</span>
-                    <span>$ AUD</span>
-                </div>
+                {tickets.map(ticket => {
+                    const qty = quantities[ticket.id] || 0;
+                    if (qty === 0) return null;
+                    return (
+                        <div key={ticket.id} className="flex justify-between">
+                        <span>{qty}x {ticket.name}</span>
+                        <span>${(ticket.price * qty).toFixed(2)} AUD</span>
+                        </div>
+                    );
+                })}
             
                 <div className="flex justify-between">
                     <span>GST</span>
-                    <span>$ AUD</span>
+                    <span>${(totalCost * GST).toFixed(2)}</span>
                 </div>
-                
-                <div className="flex justify-between font-bold">
+
+                <div className="flex justify-between">
                     <span>Total Cost</span>
-                    <span>$ AUD</span>
+                    <span>${totalCostIncludingGST.toFixed(2)} AUD</span>
                 </div>
             </div>
 
