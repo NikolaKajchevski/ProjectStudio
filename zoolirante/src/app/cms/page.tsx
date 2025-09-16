@@ -71,6 +71,8 @@ export default function AdminPanel() {
       <div className="mt-6 p-4 border rounded">
         {activeType === "animal" && <AnimalForm item={selectedItem} />}
         {activeType === "event" && <EventForm item={selectedItem} />}
+        {activeType === "shop" && <ShopForm item={selectedItem} />}
+
       </div>
     </div>
   );
@@ -229,7 +231,54 @@ function AnimalForm({ item }: { item: any }) {
       );
     }
 
+// --------------------
+// Shop Form
+function ShopForm({ item }: { item: any }) {
+  const [form, setForm] = useState(
+    item || {
+      name: "",
+      category: "",
+      price: "",
+      description: "",
+      sizes: "",
+      colors: "",
+      stock: "",
+      featured_animal: "",
+      image_url: "",
+    }
+  );
 
+  const categories = Array.from(new Set(data.merchandise.map((m) => m.category)));
+
+  const handleChange = (e: any) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    console.log("Submitting Shop Item:", form);
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <h2 className="font-bold text-xl mb-2">{item ? "Edit Shop Item" : "Add Shop Item"}</h2>
+      <input name="name" value={form.name} placeholder="Name" onChange={handleChange} className="border p-2 w-full" />
+      <select name="category" value={form.category} onChange={handleChange} className="border p-2 w-full">
+        <option value="">Select Category</option>
+        {categories.map((c) => <option key={c} value={c}>{c}</option>)}
+      </select>
+      <input name="price" type="number" value={form.price} placeholder="Price" onChange={handleChange} className="border p-2 w-full" />
+      <textarea name="description" value={form.description} placeholder="Description" onChange={handleChange} className="border p-2 w-full" />
+      <input name="sizes" value={form.sizes} placeholder="Sizes (comma separated)" onChange={handleChange} className="border p-2 w-full" />
+      <input name="colors" value={form.colors} placeholder="Colors (comma separated)" onChange={handleChange} className="border p-2 w-full" />
+      <input name="stock" type="number" value={form.stock} placeholder="Stock" onChange={handleChange} className="border p-2 w-full" />
+      <input name="featured_animal" value={form.featured_animal} placeholder="Featured Animal ID" onChange={handleChange} className="border p-2 w-full" />
+      <input name="image_url" value={form.image_url} placeholder="Image URL" onChange={handleChange} className="border p-2 w-full" />
+
+      <button type="submit" className="bg-green-600 text-black px-4 py-2 rounded">{item ? "Update Shop Item" : "Add Shop Item"}</button>
+    </form>
+  );
+}
 
 
 
