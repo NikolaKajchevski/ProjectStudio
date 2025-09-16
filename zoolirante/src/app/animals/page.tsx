@@ -1,7 +1,9 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default async function AnimalsPage() {
   const data = await fetch('http://localhost:3000/api/zooliranteData', {
+    next: { revalidate: 0 },
     cache: 'no-store'
   });
   const zooData = await data.json();
@@ -29,9 +31,12 @@ export default async function AnimalsPage() {
                 <span className="text-sm font-medium text-orange-500">
                   {animal.conservation_status}
                 </span>
-                <button className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors">
+                <Link 
+                  href={`/animals/${animal.id}`}
+                  className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors"
+                >
                   Learn More
-                </button>
+                </Link>
               </div>
             </div>
           </div>
