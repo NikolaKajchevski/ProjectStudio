@@ -36,7 +36,6 @@ export default function TicketPage() {
                         Book Now!
                     </button>
                 </Link>
-                
             </div> 
         </div>
         

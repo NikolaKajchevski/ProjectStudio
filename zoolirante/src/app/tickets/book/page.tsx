@@ -54,7 +54,8 @@ export default function TicketBooking() {
                         min={0}
                         defaultValue={0}
                         className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors"
-                    />                </div>
+                    />                
+                </div>
             </div>
 
             {/* Student Pass */}
@@ -68,7 +69,8 @@ export default function TicketBooking() {
                         min={0}
                         defaultValue={0}
                         className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors"
-                    />                </div>
+                    />                
+                </div>
             </div>
         </div>
 
@@ -150,6 +152,17 @@ export default function TicketBooking() {
                 className="w-full border border-gray-300 rounded-lg p-2 text-center focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
             </div>
+            </div>
+
+            {/* Save Payment Details */}
+            <div className="flex items-center space-x-2">
+                <input
+                    type="checkbox"    
+                    className="h-4 w-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500"
+                />
+
+                <label className="text-sm text-gray-700">
+                    Save my details </label>
             </div>
 
         <button className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors w-full">
