@@ -94,28 +94,30 @@ export default async function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {zooData.events.map((events: any) => (
-              <div key={events.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
-                <div className="text-orange-500 text-1x2 font-semibold mb-2">
-                  {events.category}
+            {zooData.events.slice(0, 3).map((events: any) => {
+              return (
+                <div key={events.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                  <div className="text-orange-500 text-1x2 font-semibold mb-2">
+                    {events.category}
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">
+                    {events.name}
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    {events.description}
+                  </p>
+                  <div className="text-sm text-gray-500 mb-4">
+                    <div>📅 {events.date} | {events.start_time} - {events.end_time}</div>
+                    <div>📍 {events.location}</div>
+                  </div>
+                  <Link href="/events">
+                    <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded font-medium transition-colors">
+                      More Info
+                    </button>
+                  </Link>
                 </div>
-                <h3 className="text-xl font-bold mb-2">
-                  {events.name}
-                </h3>
-                <p className="text-gray-600 mb-4">
-                  {events.description}
-                </p>
-                <div className="text-sm text-gray-500 mb-4">
-                  <div>📅 {events.date} | {events.start_time} - {events.end_time}</div>
-                  <div>📍 {events.location}</div>
-                </div>
-                <Link href="/events">
-                  <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded font-medium transition-colors">
-                    More Info
-                  </button>
-                </Link>
-              </div>
-            ))}
+              )
+            })}
             {/* Keeper Talk */}
             {/* <div className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
               <div className="text-orange-500 text-sm font-semibold mb-2">DAILY EVENT</div>

@@ -34,20 +34,13 @@ export default async function EventsPage() {
           <h1 className="text-4xl text-black-500 text-center font-bold">Current Events</h1>
         </div>
         <div className="mx-auto lg:px-4 py-3">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-7">
+          <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-7">
             {zooData.events.map((events: any) => (
-              <div key={events.id} className="bg-orange-50 rounded-lg shadow-md overflow-hidden border border-gray-300 grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
-                <div className="py-10 lg:px-10"> 
-                  <img src={events.image_url}></img>
-                  {/* replace this with the image later */}
-                    {/* <Image
-                      src={events.image_url}
-                      alt={events.name}
-                      fill
-                      style={{ objectFit: 'cover' }}
-                    /> */}
+              <div key={events.id} className="h-100 w-300 bg-orange-50 rounded-lg shadow-md overflow-hidden border border-gray-300 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 mx-auto">
+                <div className="py-10 mx-auto"> 
+                  <img className="relative h-80 w-120" style={{ objectFit: 'cover'}} src={events.image_url}></img>
                 </div>
-                <div className="p-4 py-20">
+                <div className="p-4 py-15 mx-auto">
                   <div className="flex justify-between items-center"> 
                       <h2 className="text-3xl font-bold mb-2">
                         {events.title}
