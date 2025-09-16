@@ -7,6 +7,7 @@ export default async function EventsPage() {
   });
   const zooData = await data.json();
 
+
   return (
     <div className="min-h-screen">
         <section className="relative h-96 bg-cover bg-center bg-no-repeat flex items-center justify-center text-white" 
@@ -19,17 +20,25 @@ export default async function EventsPage() {
           </p>
         </div>
       </section>
-      <div className="max-w-7xl mx-auto">
-      <div className="bg-white">
+      <section className="py-14 bg-orange-50">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold text-gray-800 mb-4">Zoolirante's Events!</h2>
+          <p className="text-gray-600 text-lg">
+            Come join us at Zoolirante for exciting experiences within the zoo! There's a plethora of available events each tailored towards giving you a thrilling adventure.
+          </p>
+        </div>
+      </section>
+      <div className="mx-auto">
+      <div className="bg-orange-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h1 className="text-4xl text-black-500 text-center font-bold">Upcoming Events</h1>
+          <h1 className="text-4xl text-black-500 text-center font-bold">Current Events</h1>
         </div>
         <div className="mx-auto lg:px-4 py-3">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-7">
             {zooData.events.map((events: any) => (
-              <div key={events.id} className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-500 grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
+              <div key={events.id} className="bg-orange-50 rounded-lg shadow-md overflow-hidden border border-gray-300 grid grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
                 <div className="py-10 lg:px-10"> 
-                  <img src="https://media.istockphoto.com/id/1399292810/photo/group-of-wildlife-animals-in-the-jungle-together.jpg?s=612x612&w=0&k=20&c=NXVzp7awiZhUf-OjcSmaDTcWz3h_XyGcozlTFD883eg="></img>
+                  <img src={events.image_url}></img>
                   {/* replace this with the image later */}
                     {/* <Image
                       src={events.image_url}
@@ -71,7 +80,7 @@ export default async function EventsPage() {
                             return (
                                     <Link 
                                       href={`/animals/${zooData.animals[i].id}`}
-                                      className="border border-orange-500 font-bold text-orange-500 px-12 py-1 rounded-full text-sm hover:bg-orange-600 transition-colors"
+                                      className="text-center border border-orange-500 font-bold text-orange-500 px-2 py-1 rounded-full text-sm hover:bg-orange-600 transition-colors"
                                     >
                                       {zooData.animals[i].name}
                                     </Link>
