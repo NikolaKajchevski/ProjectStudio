@@ -320,3 +320,54 @@ export async function PUT(request: NextRequest): Promise<NextResponse<APIRespons
   }
 }
 
+// DELETE method
+export async function DELETE(request: NextRequest): Promise<NextResponse<APIResponse>> {
+  try {
+    const searchParams = request.nextUrl.searchParams;
+    const id = searchParams.get('id');
+    const type = searchParams.get('type');
+
+    if (!id || !type) {
+      return NextResponse.json({ error: 'Both "id" and "type" query parameters are required for deletion.' }, { status: 400 });
+    }
+
+    let existingData: ZooData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+    let initialCount = 0;
+    let newCount = 0;
+    let message = '';
+
+    switch (type) {
+      case 'animal':
+        initialCount = existingData.animals.length;
+        existingData.animals = existingData.animals.filter(animal => animal.id !== id);
+        newCount = existingData.animals.length;
+        message = `Animal with ID ${id} deleted successfully.`;
+        break;
+      case 'event':
+        initialCount = existingData.events.length;
+        existingData.events = existingData.events.filter(event => event.id !== id);
+        newCount = existingData.events.length;
+        message = `Event with ID ${id} deleted successfully.`;
+        break;
+      case 'merchandise':
+        initialCount = existingData.merchandise.length;
+        existingData.merchandise = existingData.merchandise.filter(merch => merch.id !== id);
+        newCount = existingData.merchandise.length;
+        message = `Merchandise with ID ${id} deleted successfully.`;
+        break;
+      default:
+        return NextResponse.json({ error: 'Invalid "type" parameter. Must be "animal", "event", or "merchandise".' }, { status: 400 });
+    }
+
+    if (initialCount === newCount) {
+      return NextResponse.json({ error: `Item with ID ${id} and type "${type}" not found.` }, { status: 404 });
+    }
+
+    fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2));
+
+    return NextResponse.json({ message }, { status: 200 });
+  } catch (error) {
+    console.error('DELETE Error:', error);
+    return NextResponse.json({ error: 'Failed to delete data', details: (error as Error).message }, { status: 500 });
+  }
+}
