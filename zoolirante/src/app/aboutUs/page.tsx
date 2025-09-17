@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function AboutUS() {
+export default function AboutUs() {
   return (
     <div className="min-h-screen bg-gray-200">
       <section

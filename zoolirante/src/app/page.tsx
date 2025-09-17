@@ -17,12 +17,18 @@ export default async function Home() {
           <h1 className="text-5xl font-bold mb-4">Welcome to Zoolirante</h1>
           <p className="text-xl mb-6">Discover the wonders of wildlife!</p>
           <div className="space-x-4">
-            <button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full font-medium transition-colors">
-              Plan Your Visit
-            </button>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-gray-800 px-8 py-3 rounded-full font-medium transition-colors">
-              Explore Animals
-            </button>
+            <Link href="/tickets">
+              <button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full font-medium transition-colors">
+                Plan Your Visit
+              </button>
+            </Link>
+            
+            <Link href="/animals">
+              <button className="border-2 border-white text-white hover:bg-white hover:text-gray-800 px-8 py-3 rounded-full font-medium transition-colors">
+                Explore Animals
+              </button>
+            </Link>
+            
           </div>
         </div>
       </section>
@@ -225,9 +231,11 @@ export default async function Home() {
           </div>
 
           <div className="text-center mt-8">
-            <button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full font-medium transition-colors">
-              Visit Our Shop
-            </button>
+            <Link href="/shop">
+              <button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full font-medium transition-colors">
+                Visit Our Shop
+              </button>
+            </Link>
           </div>
 
         </div>

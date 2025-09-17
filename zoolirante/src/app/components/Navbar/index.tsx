@@ -28,17 +28,23 @@ export default function Navbar() {
             <Link href="/shop" className="text-gray-600 hover:text-gray-900 font-medium">Shop</Link>
             <Link href="/tickets" className="text-gray-600 hover:text-gray-900 font-medium">Tickets</Link>
             <Link href="/membership" className="text-gray-600 hover:text-gray-900 font-medium">Membership</Link>
-            <Link href="/aboutUS" className="text-gray-600 hover:text-gray-900 font-medium">About Us</Link>
+            <Link href="/aboutUs" className="text-gray-600 hover:text-gray-900 font-medium">About Us</Link>
           </nav>
           
           {/* Buttons to purchase tickets and for a login */}
           <div className="flex space-x-3">
-            <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors">
-              Buy Tickets
-            </button>
-            <button className="border border-orange-500 text-orange-500 hover:bg-orange-50 px-6 py-2 rounded-full font-medium transition-colors">
-              Become a Member
-            </button>
+            <Link href="/tickets">
+              <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors">
+                Buy Tickets
+              </button>
+            </Link>
+            
+            <Link href="membership">
+              <button className="border border-orange-500 text-orange-500 hover:bg-orange-50 px-6 py-2 rounded-full font-medium transition-colors">
+                Become a Member
+              </button>
+            </Link>
+            
           </div>
         </div>
       </div>
