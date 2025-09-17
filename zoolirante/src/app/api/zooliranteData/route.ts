@@ -3,7 +3,7 @@ import zooliranteData from '../../data/zooliranteData.json';
 import fs from 'fs';
 import path from 'path';
 
-// TypeScript interfaces
+// TypeScript interfaces 
 interface Location {
   zone: string;
   coordinates: {
@@ -42,7 +42,6 @@ interface Merchandise {
   featured_animal?: string;
 }
 
-
 interface Event {
   id: string;
   title: string;
@@ -63,22 +62,21 @@ interface Event {
 
 interface ZooData {
   animals: Animal[];
-  events: Event[],
-  merchandise: Merchandise[]
+  events: Event[];
+  merchandise: Merchandise[];
 }
 
 interface AnimalPostResponse {
-    animal: Animal;
+  animal: Animal;
 }
 
 interface EventPostResponse {
-    event: Event;
+  event: Event;
 }
 
 interface MerchandisePostResponse {
-    merchandise: Merchandise;
+  merchandise: Merchandise;
 }
-
 
 interface PostResponseData {
   animal: Animal;
@@ -86,44 +84,38 @@ interface PostResponseData {
   merchandise: Merchandise;
 }
 
-
 interface APIResponse {
-    message?: string;
-    error?: string;
-    animals?: Animal[];
-    data?: Animal | AnimalPostResponse | EventPostResponse | MerchandisePostResponse; // This is the key change
-    totalAnimals?: number;
-    details?: string;
-    totals?: { // You also need to add this property for the POST response
-        animals: number;
-        events: number;
-        merchandise: number;
-    }
+  message?: string;
+  error?: string;
+  animals?: Animal[];
+  data?: Animal | AnimalPostResponse | EventPostResponse | MerchandisePostResponse;
+  totalAnimals?: number;
+  details?: string;
+  totals?: {
+    animals: number;
+    events: number;
+    merchandise: number;
+  };
 }
 
-
-// Path based on your file structure
 const filePath: string = path.join(process.cwd(), 'src', 'app', 'data', 'zooliranteData.json');
 
+// GET method
 export async function GET(request: NextRequest): Promise<NextResponse<APIResponse | ZooData>> {
   try {
     const searchParams = request.nextUrl.searchParams;
     const id: string | null = searchParams.get('id');
 
     if (id) {
-      // Find the specific animal
       const animal: Animal | undefined = zooliranteData.animals.find(
         (animal: Animal) => animal.id === id
       );
-      
       if (!animal) {
         return NextResponse.json({ error: 'Animal not found' }, { status: 404 });
       }
-
       return NextResponse.json({ animals: [animal] });
     }
-    
-    // If no id is provided, return all animals
+
     return NextResponse.json(zooliranteData as ZooData);
   } catch (error) {
     console.error('GET Error:', error);
@@ -131,22 +123,19 @@ export async function GET(request: NextRequest): Promise<NextResponse<APIRespons
   }
 }
 
-
+// POST method
 export async function POST(request: NextRequest): Promise<NextResponse<APIResponse>> {
   try {
     console.log('POST request received');
-
-    // Read the request body ONCE
     const requestBody: any = await request.json();
-
     console.log('New data:', requestBody);
 
-    let existingData: ZooData = { 
+    let existingData: ZooData = {
       animals: [],
       events: [],
       merchandise: []
     };
-    
+
     if (fs.existsSync(filePath)) {
       console.log('File exists, reading...');
       const fileContent: string = fs.readFileSync(filePath, 'utf-8');
@@ -159,7 +148,6 @@ export async function POST(request: NextRequest): Promise<NextResponse<APIRespon
     let message = 'Data added successfully';
     let addedData;
 
-    // Check for an Animal
     if (requestBody.name && requestBody.species) {
       const completeAnimal: Animal = {
         id: requestBody.id || `animal-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
@@ -185,8 +173,6 @@ export async function POST(request: NextRequest): Promise<NextResponse<APIRespon
       existingData.animals.push(completeAnimal);
       addedData = { animal: completeAnimal };
       message = 'Animal added successfully';
-
-    // Check for an Event
     } else if (requestBody.title && requestBody.date) {
       const completeEvent: Event = {
         id: requestBody.id || `evt-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
@@ -213,8 +199,6 @@ export async function POST(request: NextRequest): Promise<NextResponse<APIRespon
       existingData.events.push(completeEvent);
       addedData = { event: completeEvent };
       message = 'Event added successfully';
-
-    // Check for Merchandise
     } else if (requestBody.name && requestBody.price) {
       const completeMerchandise: Merchandise = {
         id: requestBody.id || `merch-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
@@ -236,17 +220,15 @@ export async function POST(request: NextRequest): Promise<NextResponse<APIRespon
       existingData.merchandise.push(completeMerchandise);
       addedData = { merchandise: completeMerchandise };
       message = 'Merchandise added successfully';
-
     } else {
       return NextResponse.json({ error: 'Invalid data format provided' }, { status: 400 });
     }
 
-    // Write updated data back to the JSON file
     fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2));
     console.log('Data written successfully');
 
-    return NextResponse.json({ 
-      message: message, 
+    return NextResponse.json({
+      message: message,
       data: addedData,
       totals: {
         animals: existingData.animals.length,
@@ -254,18 +236,87 @@ export async function POST(request: NextRequest): Promise<NextResponse<APIRespon
         merchandise: existingData.merchandise.length
       }
     }, { status: 201 });
-
   } catch (error) {
     console.error('POST Error details:', {
       message: (error as Error).message,
       stack: (error as Error).stack,
       name: (error as Error).name
     });
-    
-    return NextResponse.json({ 
+
+    return NextResponse.json({
       message: 'Error adding data',
       error: (error as Error).message,
       details: process.env.NODE_ENV === 'development' ? (error as Error).stack : undefined
     }, { status: 500 });
   }
 }
+
+// PUT method
+export async function PUT(request: NextRequest): Promise<NextResponse<APIResponse>> {
+  try {
+    const requestBody: any = await request.json();
+    const { id, ...updatedData } = requestBody;
+
+    if (!id) {
+      return NextResponse.json({ error: 'ID is required to update an item.' }, { status: 400 });
+    }
+
+    let existingData: ZooData = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+    let updatedItem: Animal | Event | Merchandise | undefined;
+    let message = '';
+    let found = false;
+    let responseData: AnimalPostResponse | EventPostResponse | MerchandisePostResponse | undefined;
+
+    // Check for an Animal update
+    if (updatedData.species || (updatedData.name && existingData.animals.some(a => a.id === id))) {
+      const index = existingData.animals.findIndex(animal => animal.id === id);
+      if (index !== -1) {
+        existingData.animals[index] = { ...existingData.animals[index], ...updatedData };
+        updatedItem = existingData.animals[index];
+        message = 'Animal updated successfully';
+        found = true;
+        responseData = { animal: updatedItem as Animal };
+      }
+    }
+
+    // Check for an Event update
+    if (!found && updatedData.title) {
+      const index = existingData.events.findIndex(event => event.id === id);
+      if (index !== -1) {
+        existingData.events[index] = { ...existingData.events[index], ...updatedData };
+        updatedItem = existingData.events[index];
+        message = 'Event updated successfully';
+        found = true;
+        responseData = { event: updatedItem as Event };
+      }
+    }
+
+    // Check for Merchandise update
+    if (!found && updatedData.price) {
+      const index = existingData.merchandise.findIndex(merch => merch.id === id);
+      if (index !== -1) {
+        existingData.merchandise[index] = { ...existingData.merchandise[index], ...updatedData };
+        updatedItem = existingData.merchandise[index];
+        message = 'Merchandise updated successfully';
+        found = true;
+        responseData = { merchandise: updatedItem as Merchandise };
+      }
+    }
+    // Check if id exisits 
+    if (!found) {
+      return NextResponse.json({ error: `Item with ID ${id} not found.` }, { status: 404 });
+    }
+
+    //Write to JSON
+    fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2));
+
+    return NextResponse.json({
+      message,
+      data: responseData
+    }, { status: 200 });
+  } catch (error) {
+    console.error('PUT Error:', error);
+    return NextResponse.json({ error: 'Failed to update data', details: (error as Error).message }, { status: 500 });
+  }
+}
+
