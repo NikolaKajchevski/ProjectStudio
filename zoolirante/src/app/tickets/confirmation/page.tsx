@@ -15,7 +15,7 @@ interface Booking {
 }
 
 export default function TicketConfirmationPage() {
-
+    
     const [booking, setBooking] = useState<Booking | null>(null);
 
     useEffect(() => {
@@ -38,7 +38,14 @@ export default function TicketConfirmationPage() {
             </div>
             );
         }
-       
+
+       // Format date in MM / DD / YYYY
+        const dateBooked = new Date(booking.date).toLocaleDateString("en-AU", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        });
+
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     
@@ -51,7 +58,7 @@ export default function TicketConfirmationPage() {
             <div key={ticket.id} className="p-4 border border-gray-300 bg-white rounded-lg">
                 <h2 className="text-xl font-bold mb-2 text-orange-500">{ticket.quantity}x {ticket.name}</h2>
                 <p className="text-gray-600 mb-2">{booking.name}</p>
-                <p className="text-gray-600 mb-2">{booking.date}</p>       
+                <p className="text-gray-600 mb-2">Your visit is scheduled for {dateBooked}</p>       
             </div>
             ))}
         </div>
