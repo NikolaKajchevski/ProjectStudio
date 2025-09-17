@@ -2,6 +2,7 @@
 import Image from "next/image";
 import data from "../../data/zooliranteData.json";
 import ImageSlider from "@/app/components/ImageSlider";
+import Link from 'next/link';
 
 export default function MerchDetailsPage({ params }: { params: { id: string } }) {
         {/* Main Image */}
@@ -14,7 +15,7 @@ export default function MerchDetailsPage({ params }: { params: { id: string } })
     <div className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8 py-15">
             <div className="relative w-full h-400 rounded-lg overflow-hidden shadow-lg bg-white">
                   
-                <div className="relative rounded-lg overflow-hidden shadow-lg bg-black" style={{float: 'left', maxHeight: '1200px' , maxWidth:'1900px' , width: '56.25%' , height: '56.25%', marginLeft: '10%', marginTop: '10%'}}>
+                <div className="relative rounded-lg overflow-hidden shadow-lg bg-black" style={{float: 'left', maxHeight: '1200px' , maxWidth:'1600px' , width: '56.25%' , height: '56.25%', marginLeft: '10%', marginTop: '10%'}}>
                   <ImageSlider
                 imageUrls={[merchandise.image_url, merchandise.image_url]} // Todo: add support to map over an array if updating database
                // alt={merchandise.name}
@@ -31,6 +32,9 @@ export default function MerchDetailsPage({ params }: { params: { id: string } })
                   <div className="relative" > 
                     <p className="ml-20 mt-10 text-[1.5rem]">{merchandise.category}</p>
                     <p className="ml-20 mt-0 text-[1.5rem]">${merchandise.price}</p>
+
+                      <Link href="/shop/payment">
+
                       <button  className=" mt-15 bg-orange-400 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors" style={{float: 'right', marginRight: '33%', alignContent: 'center'}} > {/*Todo: link to cart page */}
                        <Image
                       src={"/cart.png"}
@@ -41,6 +45,7 @@ export default function MerchDetailsPage({ params }: { params: { id: string } })
                       />
                        <p className="ml-5 text-center text-[2.5rem]" style={{float:'right'}}>Order</p>
                      </button>
+                     </Link>
 
                     <p className="ml-20 mt-65 text-[1rem]">*Shipping not avaliable, pickup only</p>
                     <p className="ml-20 mt-0 text-[1rem]">Shop Code: {merchandise.id}</p>
