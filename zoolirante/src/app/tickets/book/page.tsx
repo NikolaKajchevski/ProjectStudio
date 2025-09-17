@@ -178,7 +178,7 @@ export default function TicketBooking() {
                 </div>
             </div>
 
-        <Link href="ticket/book/confirmation">
+        <Link href="/tickets/confirmation">
             <button className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors w-full">
                 Confirm
             </button>
