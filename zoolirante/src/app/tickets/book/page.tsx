@@ -1,7 +1,5 @@
 "use client";
-import Link from "next/link";
 import { useState } from "react";
-
 
 export default function TicketBooking() {
 
@@ -32,8 +30,18 @@ export default function TicketBooking() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [selectedDate, setSelectedDate] = useState("");
+    const [ticketError, setTicketError] = useState("");
 
-    const handleConfirm = () => {
+    const handleConfirm = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        // Must have at least one ticket selected
+        const ticketQuantity = Object.values(quantities).reduce((sum, qty) => sum + qty, 0);
+        if (ticketQuantity === 0) {
+            setTicketError("Please select at least one ticket.");
+            return;
+        }
+
         const booking = {
             name: `${firstName} ${lastName}`,
             date: selectedDate,
@@ -60,7 +68,6 @@ export default function TicketBooking() {
     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
 
         {/* Left Column: Ticket cards */}
-
         <div className="md:col-span-7 space-y-6">
 
             {tickets.map(ticket => (
@@ -73,7 +80,6 @@ export default function TicketBooking() {
                         <input
                             type="number"
                             min={0}
-                            defaultValue={0}
                             value={quantities[ticket.id] || 0}
                             onChange={e => handleQuantityChange(ticket.id, e.target.value)}
                             className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors"
@@ -84,15 +90,20 @@ export default function TicketBooking() {
         </div>
 
         {/* Right Column: Form */}
+        
         <div className="md:col-span-5 space-y-4 p-4 bg-white border border-gray-300 rounded-lg w-full">
+            <form onSubmit={handleConfirm}>
+            
             <h2 className="text-xl font-bold text-orange-500 mb-4">Your Details</h2>
-
-            <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Select Date</label>
+        
+            <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Select Date <span className="text-red-500">*</span> </label>
                 <input
                 type="date"
                 min={new Date().toISOString().split("T")[0]} // Cannot select a past date
                 value={selectedDate}
+                required
                 onChange={(e) => setSelectedDate(e.target.value)}
                 className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-300"
                 />
@@ -100,21 +111,25 @@ export default function TicketBooking() {
 
             <div className="flex space-x-2">
                 <div className="flex-1">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                        First Name <span className="text-red-500">*</span> </label>
                     <input
                     type="text"
                     placeholder="First Name"
                     value={firstName}
+                    required
                     onChange={(e) => setFirstName(e.target.value)}
                     className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
                     />
                 </div>
 
-                <div className="flex-1">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                <div className="flex-2 mb-4">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Last Name <span className="text-red-500">*</span> </label>
                     <input
                     type="text"
                     placeholder="Last Name"
+                    required
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
                     className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
@@ -122,11 +137,13 @@ export default function TicketBooking() {
                 </div>
             </div>
 
-            <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Email <span className="text-red-500">*</span> </label>
                 <input
                 type="email"
                 placeholder="janedoe@example.com"
+                required
                 className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-300"
             />
         </div>
@@ -135,42 +152,48 @@ export default function TicketBooking() {
             
             {/* Card Number */}
             <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Card Number</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Card Number <span className="text-red-500">*</span></label>
                 <input
                 type="text"
                 placeholder="1234 5678 9876 5432"
                 maxLength={19}
+                required
                 inputMode="numeric"
                 className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
             </div>
 
             {/* CVC */}
-            <div className="w-20">
-                <label className="block text-sm font-medium text-gray-700 mb-1">CVC</label>
+            <div className="w-20 mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                    CVC <span className="text-red-500">*</span></label>
                 <input
                 type="text"
                 placeholder="123"
                 maxLength={3}
                 inputMode="numeric"
+                required
                 className="w-full border border-gray-300 rounded-lg p-2 text-center focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
             </div>
 
             {/* Expiry */}
             <div className="w-24">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Expiry</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Expiry <span className="text-red-500">*</span></label>
                 <input
                 type="text"
                 placeholder="MM/YY"
                 maxLength={5}
+                required
                 className="w-full border border-gray-300 rounded-lg p-2 text-center focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
             </div>
             </div>
 
             {/* Save Payment Details */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 mb-1">
                 <input
                     type="checkbox"    
                     className="h-4 w-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500"
@@ -201,24 +224,25 @@ export default function TicketBooking() {
                     <span>${(totalCost * GST).toFixed(2)}</span>
                 </div>
 
-                <div className="flex justify-between">
+                <div className="flex justify-between font-bold">
                     <span>Total Cost</span>
                     <span>${totalCostIncludingGST.toFixed(2)} AUD</span>
                 </div>
             </div>
 
+        {/* No ticket selected */}
+        {ticketError && (
+            <p className="text-red-500 text-sm mb-2">{ticketError}</p>
+        )}
+
         <button
-            onClick={handleConfirm}
+            type="submit"
             className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors w-full">
             Confirm
         </button>
+        </form>
       </div>
     </div>
   </div>
 </div>
-
-
 )};
-
-
-            
