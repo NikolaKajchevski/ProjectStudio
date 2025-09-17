@@ -70,12 +70,9 @@ export default function TicketPage() {
                 
             </div>  
         </div>
-
     </div>
     </div>
     </div>
-
-
 )};
 
 

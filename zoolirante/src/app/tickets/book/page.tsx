@@ -28,6 +28,29 @@ export default function TicketBooking() {
     );
 
     const totalCostIncludingGST = totalCost + (totalCost * GST);
+
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [selectedDate, setSelectedDate] = useState("");
+
+    const handleConfirm = () => {
+        const booking = {
+            name: `${firstName} ${lastName}`,
+            date: selectedDate,
+            tickets: tickets.map(ticket => ({
+            id: ticket.id,
+            name: ticket.name,
+            quantity: quantities[ticket.id] || 0,
+            price: ticket.price
+            })).filter(t => t.quantity > 0),
+            subtotal: totalCost,
+            gst: totalCost * GST,
+            total: totalCostIncludingGST,
+        };
+
+        localStorage.setItem("latestBooking", JSON.stringify(booking));
+        window.location.href = "/tickets/confirmation";
+    };
        
   return (
     <div className="min-h-screen bg-gray-200">
@@ -69,6 +92,8 @@ export default function TicketBooking() {
                 <input
                 type="date"
                 min={new Date().toISOString().split("T")[0]} // Cannot select a past date
+                value={selectedDate}
+                onChange={(e) => setSelectedDate(e.target.value)}
                 className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-300"
                 />
             </div>
@@ -79,6 +104,8 @@ export default function TicketBooking() {
                     <input
                     type="text"
                     placeholder="First Name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
                     />
                 </div>
@@ -88,6 +115,8 @@ export default function TicketBooking() {
                     <input
                     type="text"
                     placeholder="Last Name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                     className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
                     />
                 </div>
@@ -151,7 +180,7 @@ export default function TicketBooking() {
                     Save my details </label>
             </div>
 
-        {/* Order Summary */}
+            {/* Order Summary */}
             <div className="space-y-1">
 
                 <h2 className="font-bold">Order Summary</h2>
@@ -178,11 +207,11 @@ export default function TicketBooking() {
                 </div>
             </div>
 
-        <Link href="/tickets/confirmation">
-            <button className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors w-full">
-                Confirm
-            </button>
-        </Link>
+        <button
+            onClick={handleConfirm}
+            className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors w-full">
+            Confirm
+        </button>
       </div>
     </div>
   </div>
