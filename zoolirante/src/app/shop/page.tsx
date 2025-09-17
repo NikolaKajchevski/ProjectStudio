@@ -19,7 +19,8 @@ export default async function Shop() {
         {zooData.merchandise.map((merch: any) => (
 
           
-          <Link 
+          <Link
+          key = {merch.id} 
            href={`/shop/${merch.id}`}
           className="bg-white  mt-10  rounded-lg shadow-xl min-h-[50px] overflow-hidden">
 

@@ -36,7 +36,6 @@ export default function TicketPage() {
                         Book Now!
                     </button>
                 </Link>
-                
             </div> 
         </div>
         
@@ -62,17 +61,18 @@ export default function TicketPage() {
                 <span className="text-sm font-medium text-orange-500">
                     For just $70 AUD, enjoy a year's worth of benefits
                 </span>
-                <button className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors">
-                Sign Up!
-                </button>
+
+                <Link href="/membership">
+                    <button className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors">
+                        Sign Up!
+                    </button>
+                </Link>
+                
             </div>  
         </div>
-
     </div>
     </div>
     </div>
-
-
 )};
 
 
