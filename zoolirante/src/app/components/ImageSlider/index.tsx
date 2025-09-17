@@ -9,7 +9,7 @@ type ImageSliderProps = {
 }
 //        <img src={imageUrls[imageIndex]}/>
 
-export function ImageSlider({imageUrls}:ImageSliderProps){
+export default function ImageSlider({imageUrls}:ImageSliderProps){
     const [imageIndex, setImageIndex] = useState(0)
 
     function nextImage(){

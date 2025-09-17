@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+    const data = await fetch('http://localhost:3000/api/zooliranteData', {
+    cache: 'no-store'
+  });
+  const zooData = await data.json();
   return (
     <div className="min-h-screen bg-white">
 
@@ -90,9 +94,32 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
+            {zooData.events.slice(0, 3).map((events: any) => {
+              return (
+                <div key={events.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                  <div className="text-orange-500 text-1x2 font-semibold mb-2">
+                    {events.category}
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">
+                    {events.name}
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    {events.description}
+                  </p>
+                  <div className="text-sm text-gray-500 mb-4">
+                    <div>📅 {events.date} | {events.start_time} - {events.end_time}</div>
+                    <div>📍 {events.location}</div>
+                  </div>
+                  <Link href="/events">
+                    <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded font-medium transition-colors">
+                      More Info
+                    </button>
+                  </Link>
+                </div>
+              )
+            })}
             {/* Keeper Talk */}
-            <div className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+            {/* <div className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
               <div className="text-orange-500 text-sm font-semibold mb-2">DAILY EVENT</div>
               <h3 className="text-xl font-bold mb-2">Lion Keeper Talk</h3>
               <p className="text-gray-600 mb-4">Join our expert keepers for an intimate look into the lives of our magnificent lions.</p>
@@ -103,10 +130,10 @@ export default function Home() {
               <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded font-medium transition-colors">
                 More Info
               </button>
-            </div>
+            </div> */}
 
             {/* Special Tour */}
-            <div className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+            {/* <div className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
               <div className="text-orange-500 text-sm font-semibold mb-2">SPECIAL EVENT</div>
               <h3 className="text-xl font-bold mb-2">Twilight Zoo Tour</h3>
               <p className="text-gray-600 mb-4">Experience the zoo after dark and see how our nocturnal animals come to life.</p>
@@ -117,10 +144,10 @@ export default function Home() {
               <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded font-medium transition-colors">
                 Book Now
               </button>
-            </div>
+            </div> */}
 
             {/* Educational Program */}
-            <div className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+            {/* <div className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
               <div className="text-orange-500 text-sm font-semibold mb-2">EDUCATION</div>
               <h3 className="text-xl font-bold mb-2">Junior Zookeeper Program</h3>
               <p className="text-gray-600 mb-4">Kids can learn about animal care and conservation through hands-on activities.</p>
@@ -131,7 +158,7 @@ export default function Home() {
               <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded font-medium transition-colors">
                 Register
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
@@ -242,11 +269,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-800 text-white py-12">
+      {/* <footer className="bg-gray-800 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* About */}
             <div>
               <h3 className="text-lg font-bold mb-4">About Zoolirante</h3>
               <p className="text-gray-300 text-sm mb-4">
@@ -254,7 +279,6 @@ export default function Home() {
               </p>
             </div>
 
-            {/* Contact */}
             <div>
               <h3 className="text-lg font-bold mb-4">Contact Us</h3>
               <div className="space-y-2 text-sm text-gray-300">
@@ -269,7 +293,7 @@ export default function Home() {
             <p>&copy; 2025 Zoolirante. All rights reserved. | Privacy Policy | Terms of Service</p>
           </div>
         </div>
-      </footer>
+      </footer> */}
       
     </div>
   );
