@@ -3,6 +3,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useMemo } from 'react';
+import Item from "@/app/components/Item";
+
+
 
 interface Merchandise {
   id: string;
@@ -96,34 +99,27 @@ export default function Shop() {
               ))}
             </select>
           </div>
+
+              <button style={{width: "3rem", height: "3rem", position: "relative" }} className='px-2 py-1 border border-orange-500 rounded-full hover:bg-orange-600'>
+              <Image
+                src={"/cart.png"}
+                alt="shop icon"
+                width={30}
+                height={30}
+              />
+              <div className='rounded-full bg-orange-500' style={{width: '1.5rem', height: '1.5rem', position: 'absolute', top: 0, right: 0, transform: 'translate(25%,-25%)'}}>
+                n
+              </div>
+
+
+            </button>
+          
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredMerchandise.map((merch: Merchandise) => (
-          <Link 
-            key={merch.id}
-            href={`/shop/${merch.id}`}
-            className="bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow"
-          >
-            <div className="relative h-48">
-              <Image
-                src={merch.image_url}
-                alt={merch.name}
-                fill
-                style={{ objectFit: 'cover' }}
-              />
-            </div>
-            <div className="p-5">
-              <h2 className="text-xl font-bold text-black mb-2">{merch.name}</h2>
-              <p className="text-orange-500 font-medium mb-4">{merch.category}</p>
-              <div className="mb-4">
-                <p className="text-black font-medium mb-1">Description:</p>
-                <p className="text-black text-sm">{merch.description}</p>
-              </div>
-              <p className="text-green-900 font-bold text-lg">${merch.price}</p>
-            </div>
-          </Link>
+          <Item {...merch}/>
         ))}
       </div>
 
