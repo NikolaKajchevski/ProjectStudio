@@ -118,7 +118,9 @@ export default function Shop() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredMerchandise.map((merch: Merchandise) => (
+          <div key={merch.id} className='bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow'>
           <Item {...merch}/>
+          </div>
         ))}
       </div>
 

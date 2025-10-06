@@ -16,7 +16,7 @@ export default function MerchDetailsPage({ params }: { params: { id: string } })
                   
                 <div className="relative rounded-lg overflow-hidden shadow-lg bg-black" style={{float: 'left', maxHeight: '1200px' , maxWidth:'1900px' , width: '56.25%' , height: '56.25%', marginLeft: '10%', marginTop: '10%'}}>
                   <ImageSlider
-                imageUrls={[merchandise.image_url, merchandise.image_url]} // Todo: add support to map over an array if updating database
+                imageUrls={[merchandise.image_url]} // Todo: add additonal images in database {[merchandise.image_url, merchandise.image_url2]}
                // alt={merchandise.name}
                // fill
                 //style={{ objectFit: 'cover' }}
