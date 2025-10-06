@@ -65,7 +65,21 @@ export default function Shop() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <h1 className="text-3xl font-light text-gray-500">Shop</h1>
       <br />
-      
+      <div style={{float:'right', marginLeft:'1rem'}}>
+              <button style={{width: "3rem", height: "3rem", position: "relative" }} className='px-2 py-1 border border-orange-500 rounded-full hover:bg-orange-600'>
+              <Image
+                src={"/cart.png"}
+                alt="shop icon"
+                width={30}
+                height={30}
+              />
+              <div className='rounded-full bg-orange-500' style={{width: '1.5rem', height: '1.5rem', position: 'absolute', top: 0, right: 0, transform: 'translate(25%,-25%)'}}>
+                n
+              </div>
+            </button>
+      </div>
+
+
       {/* Search Bar and Category Filter */}
       <div className="mb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -99,21 +113,6 @@ export default function Shop() {
               ))}
             </select>
           </div>
-
-              <button style={{width: "3rem", height: "3rem", position: "relative" }} className='px-2 py-1 border border-orange-500 rounded-full hover:bg-orange-600'>
-              <Image
-                src={"/cart.png"}
-                alt="shop icon"
-                width={30}
-                height={30}
-              />
-              <div className='rounded-full bg-orange-500' style={{width: '1.5rem', height: '1.5rem', position: 'absolute', top: 0, right: 0, transform: 'translate(25%,-25%)'}}>
-                n
-              </div>
-
-
-            </button>
-          
         </div>
       </div>
 
