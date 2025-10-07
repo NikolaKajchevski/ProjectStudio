@@ -329,7 +329,7 @@
         "start_date": "2024-01-15",
         "expiry_date": "2025-01-15"
       },
-      "favorite_animals": ["001", "004"],
+      "favourite_animals": ["001", "004"],
       "saved_payment_methods": [
         {
           "id": "pm001",
