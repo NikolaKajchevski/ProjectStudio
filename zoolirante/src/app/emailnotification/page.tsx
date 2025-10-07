@@ -18,21 +18,29 @@ export default function NotificationSender() {
     oneWeekFromNow.setDate(today.getDate() + 7);
 
     zooData.users.forEach(user => {
-      const upcomingFavouriteEvents = zooData.events.filter(event => {
+      // Example: Filter events by favourite animals
+      const upcomingFavouriteEvents = (zooData.events || []).filter(event => {
         const eventDate = new Date(event.date);
         return (
-          event.animals_featured.some(id => user.favourite_animals.includes(id)) &&
+          event.animals_featured.some((id: string) => user.favourite_animals.includes(id)) &&
           eventDate >= today &&
           eventDate <= oneWeekFromNow
         );
       });
 
+      // Example: Filter upcoming visits
       const upcomingVisits = user.visit_history.filter(visit => {
         const visitDate = new Date(visit.date);
         return visitDate >= today && visitDate <= oneWeekFromNow;
       });
 
-      if (upcomingFavouriteEvents.length === 0 && upcomingVisits.length === 0) return;
+      // Skip if nothing to notify
+      if (upcomingFavouriteEvents.length === 0 && upcomingVisits.length === 0) {
+        console.log(`⚪ No upcoming notifications for ${user.email}`);
+        return;
+      }
+
+      console.log(`📧 Preparing to send email to ${user.email}`);
 
       let message = `Hi ${user.first_name},\n\n`;
 
@@ -58,10 +66,10 @@ export default function NotificationSender() {
       };
 
       emailjs.send(
-        "service_mx95jbu",
-        "template_xrkqwwz",
+        "service_rz5dvua",        // Your EmailJS service ID
+        "template_xrkqwwz",       // Your EmailJS template ID
         templateParams,
-        "xcxMvt-bjNmhYQVQx"
+        "xcxMvt-bjNmhYQVQx"       // Your EmailJS public key
       )
       .then(
         result => console.log(`✅ Sent to ${user.email}:`, result.text),
