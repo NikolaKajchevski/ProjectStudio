@@ -311,7 +311,7 @@
     {
       "id": "user001",
       "username": "giovanni_rossi",
-      "email": "oli1703d@outlook.com",
+      "email": "dyeoi001@mymail.unisa.edu.au",
       "first_name": "Giovanni",
       "last_name": "Rossi",
       "date_of_birth": "1985-03-15",
@@ -341,12 +341,12 @@
       ],
       "visit_history": [
         {
-          "date": "2024-08-20",
+          "date": "2025-10-12",
           "ticket_type": "Member Entry",
           "special_events": ["evt002"]
         },
         {
-          "date": "2024-07-10",
+          "date": "2025-10-10",
           "ticket_type": "Member Entry",
           "special_events": []
         }
