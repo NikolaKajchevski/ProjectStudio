@@ -1,21 +1,23 @@
-"use client"; 
+"use client";
 
-import { useEffect } from "react";
+import { useState } from "react";
 import emailjs from "@emailjs/browser";
-import zooData from "../data/zooliranteData.json"; 
+import zooData from "../data/zooliranteData.json";
 
 export default function NotificationSender() {
+  const [status, setStatus] = useState<string>("");
 
   const formatDate = (date: string | number | Date) =>
     new Date(date).toISOString().split("T")[0];
 
-  useEffect(() => {
+  const sendNotifications = () => {
+    setStatus("Sending notifications...");
+
     const today = new Date();
     const oneWeekFromNow = new Date();
     oneWeekFromNow.setDate(today.getDate() + 7);
 
     zooData.users.forEach(user => {
-      // Events with user's favourite animals within 1 week
       const upcomingFavouriteEvents = zooData.events.filter(event => {
         const eventDate = new Date(event.date);
         return (
@@ -25,7 +27,6 @@ export default function NotificationSender() {
         );
       });
 
-      // Visits within 1 week
       const upcomingVisits = user.visit_history.filter(visit => {
         const visitDate = new Date(visit.date);
         return visitDate >= today && visitDate <= oneWeekFromNow;
@@ -33,13 +34,12 @@ export default function NotificationSender() {
 
       if (upcomingFavouriteEvents.length === 0 && upcomingVisits.length === 0) return;
 
-      // Build message
       let message = `Hi ${user.first_name},\n\n`;
 
       if (upcomingFavouriteEvents.length > 0) {
         message += `🐾 Events featuring your favourite animals this week:\n`;
         upcomingFavouriteEvents.forEach(event => {
-          message += `• ${event.title} on ${event.date} at ${event.location}\n`;
+          message += `• ${event.title} on ${formatDate(event.date)} at ${event.location}\n`;
         });
         message += "\n";
       }
@@ -69,12 +69,20 @@ export default function NotificationSender() {
       );
     });
 
-  }, []);
+    setStatus("Notifications sent! Check console for details.");
+  };
 
   return (
     <div className="p-6 space-y-4 max-w-lg mx-auto border rounded-2xl shadow-lg">
       <h2 className="text-xl font-bold">Zoo Email Notification System</h2>
-      <p>Emails for upcoming events within one week are sent automatically.</p>
+      <p>Click the button below to send emails for upcoming events within one week.</p>
+      <button
+        className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+        onClick={sendNotifications}
+      >
+        Send Notifications
+      </button>
+      {status && <p className="text-gray-700 mt-2">{status}</p>}
     </div>
   );
 }

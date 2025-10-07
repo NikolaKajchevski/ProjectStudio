@@ -1,8 +1,7 @@
 import Image from "next/image";
 import data from "../../data/zooliranteData.json";
 
-export default function AnimalDetailsPage({ params }: { params: { id: string } }) {
-  // Find the selected animal
+export default function AnimalDetailsPage({ params }: any) {
   const animal = data.animals.find(a => a.id === params.id);
 
   if (!animal) {

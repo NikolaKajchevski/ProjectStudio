@@ -1,16 +1,15 @@
-
 import Image from "next/image";
 import data from "../../data/zooliranteData.json";
 import ImageSlider from "@/app/components/ImageSlider";
 
-export default function MerchDetailsPage({ params }: { params: { id: string } }) {
-        {/* Main Image */}
-            const merchandise = data.merchandise.find(a => a.id === params.id);
-            if (!merchandise) {
-                return <p className="text-center text-red-500 mt-10">Item not found.</p>;
-            }
+export default function MerchDetailsPage({ params }: any) {
+  // Find merchandise
+  const merchandise = data.merchandise.find(a => a.id === params.id);
+  if (!merchandise) {
+    return <p className="text-center text-red-500 mt-10">Item not found.</p>;
+  }
 
-              return (
+  return (
     <div className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8 py-15">
             <div className="relative w-full h-400 rounded-lg overflow-hidden shadow-lg bg-white">
                   
