@@ -1,32 +1,16 @@
-
 import Image from "next/image";
 import data from "../../data/zooliranteData.json";
 import ImageSlider from "@/app/components/ImageSlider";
 import { Vidaloka } from "next/font/google";
 
-export default function MerchDetailsPage({ params }: { params: { id: string } }) {
-        {/* Main Image */}
-            const merchandise = data.merchandise.find(a => a.id === params.id);
-            var imagelist = [merchandise?.image_url]
+export default function MerchDetailsPage({ params }: any) {
+  // Find merchandise
+  const merchandise = data.merchandise.find(a => a.id === params.id);
+  if (!merchandise) {
+    return <p className="text-center text-red-500 mt-10">Item not found.</p>;
+  }
 
-
-
-            if (!merchandise) {
-                return <p className="text-center text-red-500 mt-10">Item not found.</p>;
-            }
-
-            if (merchandise.image_extras) {
-              for (let key in merchandise.image_extras) {
-                    const value = merchandise.image_extras[key];
-                    console.log(`Key: ${key}, Value: ${value}`);
-                    imagelist.push(value)
-
-
-              }
-            }
-
-
-              return (
+  return (
     <div className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8 py-15">
             <div className="relative w-full h-400 rounded-lg overflow-hidden shadow-lg bg-white">
                   

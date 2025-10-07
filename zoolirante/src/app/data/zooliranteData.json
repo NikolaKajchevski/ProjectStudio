@@ -315,7 +315,7 @@
     {
       "id": "user001",
       "username": "giovanni_rossi",
-      "email": "giovanni.rossi@email.com",
+      "email": "dyeoi001@mymail.unisa.edu.au",
       "first_name": "Giovanni",
       "last_name": "Rossi",
       "date_of_birth": "1985-03-15",
@@ -333,7 +333,7 @@
         "start_date": "2024-01-15",
         "expiry_date": "2025-01-15"
       },
-      "favorite_animals": ["001", "004"],
+      "favourite_animals": ["001", "004"],
       "saved_payment_methods": [
         {
           "id": "pm001",
@@ -345,12 +345,12 @@
       ],
       "visit_history": [
         {
-          "date": "2024-08-20",
+          "date": "2025-10-12",
           "ticket_type": "Member Entry",
           "special_events": ["evt002"]
         },
         {
-          "date": "2024-07-10",
+          "date": "2025-10-10",
           "ticket_type": "Member Entry",
           "special_events": []
         }
