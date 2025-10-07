@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useMemo } from 'react';
 import Item from "@/app/components/Item";
+import Cart from "@/app/components/ShoppingCart";
 
 
 
@@ -73,9 +74,9 @@ export default function Shop() {
                 width={30}
                 height={30}
               />
-              <div className='rounded-full bg-orange-500' style={{width: '1.5rem', height: '1.5rem', position: 'absolute', top: 0, right: 0, transform: 'translate(25%,-25%)'}}>
-                n
-              </div>
+
+              
+            <Cart/>
             </button>
       </div>
 
