@@ -33,10 +33,10 @@ export default function ImageSlider({imageUrls}:ImageSliderProps){
       
 
         <div style={{width:'100%', height: "100%", display: "flex"} } >
-            <div style={{width:'100%', height: "100%"}}>
+            <div style={{width:'100%', height: "100%", alignContent: 'center'}}>
                 <img src={imageUrls[imageIndex]}className="img-slider-img"/>
-                <button onClick={prevImage} style={{left:0}} className="next bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors img-slider-btn">{'\u2190'}</button>
-                <button onClick={nextImage} style={{right:0}} className="next bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors img-slider-btn">{'\u2192'}</button>
+                <button onClick={prevImage} style={{left:0, bottom: 0, position: 'absolute'}} className="next bg-orange-500 hover:bg-orange-600 text-white rounded-full font-medium transition-colors img-slider-btn">{'\u2190'}</button>
+                <button onClick={nextImage} style={{right:0, bottom: 0, position: 'absolute'}} className="next bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors img-slider-btn">{'\u2192'}</button>
             </div>
 
             

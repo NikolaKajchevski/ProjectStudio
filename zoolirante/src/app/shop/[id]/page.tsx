@@ -2,13 +2,29 @@
 import Image from "next/image";
 import data from "../../data/zooliranteData.json";
 import ImageSlider from "@/app/components/ImageSlider";
+import { Vidaloka } from "next/font/google";
 
 export default function MerchDetailsPage({ params }: { params: { id: string } }) {
         {/* Main Image */}
             const merchandise = data.merchandise.find(a => a.id === params.id);
+            var imagelist = [merchandise?.image_url]
+
+
+
             if (!merchandise) {
                 return <p className="text-center text-red-500 mt-10">Item not found.</p>;
             }
+
+            if (merchandise.image_extras) {
+              for (let key in merchandise.image_extras) {
+                    const value = merchandise.image_extras[key];
+                    console.log(`Key: ${key}, Value: ${value}`);
+                    imagelist.push(value)
+
+
+              }
+            }
+
 
               return (
     <div className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8 py-15">
@@ -16,16 +32,19 @@ export default function MerchDetailsPage({ params }: { params: { id: string } })
                   
                 <div className="relative rounded-lg overflow-hidden shadow-lg bg-black" style={{float: 'left', maxHeight: '1200px' , maxWidth:'1900px' , width: '56.25%' , height: '56.25%', marginLeft: '10%', marginTop: '10%'}}>
                   <ImageSlider
-                imageUrls={[merchandise.image_url, merchandise.image_url]} // Todo: add support to map over an array if updating database
+                imageUrls={imagelist} // Todo: add additonal images in database {[merchandise.image_url, merchandise.image_url2]}
                // alt={merchandise.name}
                // fill
                 //style={{ objectFit: 'cover' }}
                   />
                 </div>
+                
+
+
                 <div className=" rounded-lg bg-orange-500" style={{float: 'right', marginRight: '5%', width: '23.75%', height: '56.25%', marginTop: '10%'}}>
                   <div className="bg-orange-400" style={{height:'50%'}}>
                     <h1 className="text-[4rem] text-center font-bold" >{merchandise.name}</h1>
-                    <p className="mt-5 text-center text-[2.5rem">{merchandise.description}</p>
+                    <p className="mt-5 text-center text-2.5rem">{merchandise.description}</p>
                   </div>
 
                   <div className="relative" > 
