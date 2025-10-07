@@ -265,6 +265,10 @@
       "description": "Soft and cuddly plush version of our beloved lion Marco",
       "image_url": "/images/merchandise/marco-plush.jpg",
       "stock": 45,
+      "image_extras": [
+      "/images/merchandise/marco-plush1.jfif",
+      "/images/merchandise/marco-plush2.jfif"
+      ],
       "featured_animal": "001"
     },
     {
