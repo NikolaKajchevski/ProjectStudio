@@ -9,18 +9,39 @@ export default function MerchDetailsPage({ params }: any) {
   if (!merchandise) {
     return <p className="text-center text-red-500 mt-10">Item not found.</p>;
   }
+  var imagelist = [merchandise?.image_url] // TODO: Declare that this is a string array
+
+
+    if (merchandise.image_extras) {
+              for (let key in merchandise.image_extras) {
+                    const value = merchandise.image_extras[key];
+                    //console.log(`Key: ${key}, Value: ${value}`);
+                    imagelist.push(value)
+
+
+              }
+            }
 
   return (
     <div className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8 py-15">
             <div className="relative w-full h-400 rounded-lg overflow-hidden shadow-lg bg-white">
                   
                 <div className="relative rounded-lg overflow-hidden shadow-lg bg-black" style={{float: 'left', maxHeight: '1200px' , maxWidth:'1900px' , width: '56.25%' , height: '56.25%', marginLeft: '10%', marginTop: '10%'}}>
-                  <ImageSlider
-                imageUrls={imagelist} // Todo: add additonal images in database {[merchandise.image_url, merchandise.image_url2]}
-               // alt={merchandise.name}
-               // fill
-                //style={{ objectFit: 'cover' }}
+
+                {imagelist.length > 1 ? ( // Detects if there are additonal_images otherwise displays an image rather than imageslider
+                <ImageSlider
+                imageUrls={imagelist}
                   />
+                ) : (
+                    <Image
+              src= {imagelist[0]} // replace with your fallback image path
+              alt="No images available"
+              width={800}
+              height={600}
+              className="object-contain w-full h-full"
+              style={{objectFit: 'cover'}}
+            />
+                )}
                 </div>
                 
 
