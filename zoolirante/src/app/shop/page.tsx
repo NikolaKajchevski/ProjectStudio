@@ -80,6 +80,10 @@ export default function Shop() {
 
     const addCart = (id: string) => {
         var cartArray = JSON.parse(localStorage.getItem('cart') || '[]')
+        var failSafe: string[] = []
+        if (cartArray.length < 1) {
+          localStorage.setItem('cart', JSON.stringify(failSafe))
+        }
         var cartCheck = []
         var item = {key: id, value: 1};
         for (var i = 0; i < cartArray.length; i++) {
@@ -97,9 +101,6 @@ export default function Shop() {
             cartArray.push(item)
         }
         localStorage.setItem('cart', JSON.stringify(cartArray))
-        console.log(cartArray[1].value)
-        console.log(cartCheck)
-        console.log('test') 
 
     }
 
