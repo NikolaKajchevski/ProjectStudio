@@ -153,7 +153,7 @@
       "id": "evt001",
       "title": "Wild Italy Parade",
       "description": "Join us for a spectacular parade featuring animals that represent the wildlife of Italy and surrounding regions.",
-      "date": "2024-09-15",
+      "date": "2025-10-12",
       "start_time": "2:00 PM",
       "end_time": "3:30 PM",
       "location": "Main Pathway",
@@ -170,7 +170,7 @@
       "id": "evt002",
       "title": "Penguin Feeding Experience",
       "description": "Get up close with Lorenzo and learn about penguin behavior while helping with feeding time.",
-      "date": "2024-09-12",
+      "date": "2025-10-12",
       "start_time": "11:00 AM",
       "end_time": "11:45 AM",
       "location": "Polar Paradise",
@@ -187,7 +187,7 @@
       "id": "evt003",
       "title": "Panda Photography Workshop",
       "description": "Learn professional photography techniques while capturing beautiful moments with Sophia the panda.",
-      "date": "2024-09-20",
+      "date": "2025-10-12",
       "start_time": "9:30 AM",
       "end_time": "12:00 PM",
       "location": "Asian Gardens",
@@ -316,8 +316,8 @@
       "id": "user001",
       "username": "giovanni_rossi",
       "email": "dyeoi001@mymail.unisa.edu.au",
-      "first_name": "Giovanni",
-      "last_name": "Rossi",
+      "first_name": "Oli",
+      "last_name": "Dyer",
       "date_of_birth": "1985-03-15",
       "phone": "+61 4 1234 5678",
       "address": {
@@ -333,7 +333,7 @@
         "start_date": "2024-01-15",
         "expiry_date": "2025-01-15"
       },
-      "favourite_animals": ["001", "004"],
+      "favourite_animals": ["001"],
       "saved_payment_methods": [
         {
           "id": "pm001",

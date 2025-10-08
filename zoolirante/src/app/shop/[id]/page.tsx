@@ -51,13 +51,10 @@ export default function MerchDetailsPage({ params }: any) {
 
                 
                 </div>
-                
-
-
                 <div className=" rounded-lg bg-orange-500" style={{float: 'right', marginRight: '5%', width: '23.75%', height: '56.25%', marginTop: '10%'}}>
                   <div className="bg-orange-400" style={{height:'50%'}}>
                     <h1 className="text-[4rem] text-center font-bold" >{merchandise.name}</h1>
-                    <p className="mt-5 text-center text-2.5rem">{merchandise.description}</p>
+                    <p className="mt-5 text-center text-[2.5rem">{merchandise.description}</p>
                   </div>
 
                   <div className="relative" > 
