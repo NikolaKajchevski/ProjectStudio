@@ -299,7 +299,7 @@
       "category": "Plush Toys",
       "price": 28,
       "description": "Soft and cuddly plush version of our beloved lion Marco",
-      "image_url": "/images/merchandise/marco-plush.jpg",
+      "image_url": "/images/merchandise/lion-plush-toy.webp",
       "stock": 45,
       "image_extras": [
         "/images/merchandise/marco-plush1.jfif",
@@ -326,7 +326,7 @@
         "Blue",
         "White"
       ],
-      "image_url": "/images/merchandise/zoolirante-tshirt.jpg",
+      "image_url": "/images/merchandise/t-shirt.webp",
       "stock": 120
     },
     {
@@ -335,7 +335,7 @@
       "category": "Books",
       "price": 18,
       "description": "Comprehensive guide to Australian wildlife with beautiful photographs",
-      "image_url": "/images/merchandise/wildlife-guide.jpg",
+      "image_url": "/images/merchandise/books.webp",
       "stock": 30
     },
     {
@@ -344,7 +344,7 @@
       "category": "Educational",
       "price": 8,
       "description": "Educational sheets about penguin species around the world",
-      "image_url": "/images/merchandise/penguin-info-sheets.jpg",
+      "image_url": "/images/merchandise/penguin-book.webp",
       "stock": 75,
       "featured_animal": "003"
     },
@@ -354,7 +354,7 @@
       "category": "Accessories",
       "price": 15,
       "description": "Eco-friendly stainless steel water bottle with zoo branding",
-      "image_url": "/images/merchandise/water-bottle.jpg",
+      "image_url": "/images/merchandise/bottle.webp",
       "stock": 60
     }
   ],

@@ -124,47 +124,6 @@ export default async function Home() {
                 </div>
               )
             })}
-            {/* Keeper Talk */}
-            {/* <div className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
-              <div className="text-orange-500 text-sm font-semibold mb-2">DAILY EVENT</div>
-              <h3 className="text-xl font-bold mb-2">Lion Keeper Talk</h3>
-              <p className="text-gray-600 mb-4">Join our expert keepers for an intimate look into the lives of our magnificent lions.</p>
-              <div className="text-sm text-gray-500 mb-4">
-                <div>📅 Daily at 11:00 AM & 3:00 PM</div>
-                <div>📍 African Savanna Zone</div>
-              </div>
-              <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded font-medium transition-colors">
-                More Info
-              </button>
-            </div> */}
-
-            {/* Special Tour */}
-            {/* <div className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
-              <div className="text-orange-500 text-sm font-semibold mb-2">SPECIAL EVENT</div>
-              <h3 className="text-xl font-bold mb-2">Twilight Zoo Tour</h3>
-              <p className="text-gray-600 mb-4">Experience the zoo after dark and see how our nocturnal animals come to life.</p>
-              <div className="text-sm text-gray-500 mb-4">
-                <div>📅 25th September, Saturday 6:00 PM</div>
-                <div>📍 Main Entrance</div>
-              </div>
-              <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded font-medium transition-colors">
-                Book Now
-              </button>
-            </div> */}
-
-            {/* Educational Program */}
-            {/* <div className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
-              <div className="text-orange-500 text-sm font-semibold mb-2">EDUCATION</div>
-              <h3 className="text-xl font-bold mb-2">Junior Zookeeper Program</h3>
-              <p className="text-gray-600 mb-4">Kids can learn about animal care and conservation through hands-on activities.</p>
-              <div className="text-sm text-gray-500 mb-4">
-                <div>📅 Weekends 10:00 AM - 12:00 PM</div>
-                <div>📍 Education Center</div>
-              </div>
-              <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded font-medium transition-colors">
-                Register
-              </button>
-            </div> */}
           </div>
         </div>
       </section>
@@ -183,7 +142,7 @@ export default async function Home() {
             {/* Plush Toys */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
               <div className="h-64 bg-cover bg-center bg-no-repeat" 
-                   style={{backgroundImage: "url('https://tse1.mm.bing.net/th/id/OIP.gPW3DT06aHuCVM1DavJEJgHaIG?rs=1&pid=ImgDetMain&o=7&rm=3')"}}>
+                   style={{backgroundImage: "url('https://auroragift.com/cdn/shop/files/50264.jpg?v=1753990279')"}}>
               </div>
               <div className="p-4">
                 <h3 className="font-bold mb-2">Plush Animals</h3>
