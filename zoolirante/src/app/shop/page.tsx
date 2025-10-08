@@ -67,17 +67,9 @@ export default function Shop() {
       <h1 className="text-3xl font-light text-gray-500">Shop</h1>
       <br />
       <div style={{float:'right', marginLeft:'1rem'}}>
-              <button style={{width: "3rem", height: "3rem", position: "relative" }} className='px-2 py-1 border border-orange-500 rounded-full hover:bg-orange-600'>
-              <Image
-                src={"/cart.png"}
-                alt="shop icon"
-                width={30}
-                height={30}
-              />
 
               
             <Cart/>
-            </button>
       </div>
 
 
