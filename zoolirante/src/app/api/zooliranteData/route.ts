@@ -346,7 +346,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<APIRespon
             .map((line, i) => (i === 0 ? line : entryIndent + line))
             .join('\n');
 
-          const insertion = (isEmpty ? '\n' + entryIndent + userJson + '\n' + baseIndent : '\n' + entryIndent + ',' + userJson.replace(/^/,'') + '\n' + baseIndent);
+          const insertion = (isEmpty ? '\n' + entryIndent + userJson + '\n' + baseIndent : '\n' + entryIndent + userJson.replace(/^/,'') + '\n' + baseIndent);
 
           // If non-empty, we need to insert a comma before the new object.
           let newContent: string;
