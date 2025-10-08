@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import data from "../data/zooliranteData.json";
 
-type AdminType = "animal" | "event" | "shop";
+type AdminType = "animal" | "event" | "shop" | "account";
 
 interface Animal {
   id: string;
@@ -56,7 +56,17 @@ interface Merchandise {
   featured_animal?: string;
 }
 
-type Item = Animal | Event | Merchandise;
+interface User {
+  id?: string;
+  email: string;
+  first_name?: string;
+  last_name?: string;
+  account_type: string; // "customer" | "admin"
+  member?: boolean;
+  favourite_animals?: string[];
+}
+
+type Item = Animal | Event | Merchandise | User;
 
 interface FormProps<T> {
   item: T | null;
@@ -69,6 +79,7 @@ export default function AdminPanel() {
     animal: data.animals as Animal[],
     event: data.events as Event[],
     shop: data.merchandise as Merchandise[],
+    account: (data as any).users as User[],
   });
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
 
@@ -81,6 +92,7 @@ export default function AdminPanel() {
         animal: allData.animals,
         event: allData.events,
         shop: allData.merchandise,
+        account: allData.users,
       });
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -117,7 +129,7 @@ export default function AdminPanel() {
 
   const handleFormSubmit = <T extends Item>(updatedItem: T) => {
     if (selectedItem) {
-      const index = items[activeType].findIndex((item) => item.id === updatedItem.id);
+      const index = items[activeType].findIndex((item: any) => (item.id ?? item.email) === ((updatedItem as any).id ?? (updatedItem as any).email));
       if (index !== -1) {
         const newItems = [...items[activeType]] as T[];
         newItems[index] = updatedItem;
@@ -137,7 +149,7 @@ export default function AdminPanel() {
     <div className="p-6 space-y-6 text-black bg-gray-50 min-h-screen">
       {/* Type Selector */}
       <div className="flex flex-wrap gap-4 justify-center">
-        {["animal", "event", "shop"].map((type) => (
+        {["animal", "event", "shop", "account"].map((type) => (
           <button
             key={type}
             onClick={() => handleTypeChange(type as AdminType)}
@@ -158,11 +170,12 @@ export default function AdminPanel() {
         <div className="space-y-2">
           {items[activeType].map((item: any) => (
             <div
-              key={item.id}
+              key={item.id || item.email}
               className="flex justify-between items-center p-3 border rounded-lg bg-gray-100 hover:bg-gray-200 transition"
             >
               <span className="font-medium truncate">
-                {item.name || item.title}
+                {item.name || item.title || item.email}
+                {activeType === 'account' && item.account_type ? ` — ${item.account_type}` : ''}
               </span>
               <div className="flex gap-2">
                 <button
@@ -171,12 +184,14 @@ export default function AdminPanel() {
                 >
                   Edit
                 </button>
-                <button
-                  className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md"
-                  onClick={() => handleDelete(item.id)}
-                >
-                  Delete
-                </button>
+                {activeType !== 'account' && (
+                  <button
+                    className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md"
+                    onClick={() => handleDelete(item.id)}
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
             </div>
           ))}
@@ -193,6 +208,9 @@ export default function AdminPanel() {
         )}
         {activeType === "shop" && (
           <ShopForm item={selectedItem as Merchandise | null} onSubmitSuccess={handleFormSubmit} />
+        )}
+        {activeType === "account" && (
+          <AccountForm item={selectedItem as User | null} onSubmitSuccess={handleFormSubmit} />
         )}
       </div>
     </div>
@@ -535,6 +553,48 @@ function ShopForm({ item, onSubmitSuccess }: FormProps<Merchandise>) {
       <input name="image_url" value={form.image_url} placeholder="Image URL" onChange={handleChange} className="border p-2 rounded w-full" />
       <button type="submit" className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700">
         {item ? "Update Shop Item" : "Add Shop Item"}
+      </button>
+    </form>
+  );
+}
+
+/* -------------------- Account Form -------------------- */
+function AccountForm({ item, onSubmitSuccess }: FormProps<User>) {
+  const [form, setForm] = useState<{ email: string; account_type: string }>({ email: "", account_type: "customer" });
+
+  useEffect(() => {
+    if (item) setForm({ email: item.email, account_type: (item.account_type || 'customer').toLowerCase() });
+  }, [item]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const res = await fetch('/api/zooliranteData', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: form.email, account_type: form.account_type })
+      });
+      if (res.ok) {
+        const result = await res.json();
+        onSubmitSuccess((result.data as any).user as User);
+      } else {
+        console.error(await res.json());
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-3">
+      <h2 className="font-bold text-2xl mb-4">Manage Accounts</h2>
+      <input value={form.email} disabled placeholder="Select a user from the list" className="border p-2 rounded w-full" />
+      <select value={form.account_type} onChange={(e) => setForm({ ...form, account_type: e.target.value })} className="border p-2 rounded w-full">
+        <option value="customer">Customer</option>
+        <option value="admin">Admin</option>
+      </select>
+      <button type="submit" className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700" disabled={!form.email}>
+        Update Account Type
       </button>
     </form>
   );

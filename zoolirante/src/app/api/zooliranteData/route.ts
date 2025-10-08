@@ -248,21 +248,51 @@ export async function POST(request: NextRequest): Promise<NextResponse<APIRespon
       existingData.merchandise.push(completeMerchandise);
       addedData = { merchandise: completeMerchandise };
       message = 'Merchandise added successfully';
-    } else if (requestBody.email && requestBody.first_name && requestBody.last_name) {
+    } else if (requestBody.email) {
+      // Upsert User (create if not exists, update if exists)
+      const existingIndex = existingData.users.findIndex(u => u.email === requestBody.email);
+      if (existingIndex !== -1) {
+        // Update existing user in memory
+        const updatedUser: User = {
+          // For legacy data that might not have id, generate one once
+          id: (existingData.users[existingIndex] as any).id || requestBody.id || `user${String(existingData.users.length).padStart(3, '0')}`,
+          email: requestBody.email,
+          first_name: requestBody.first_name ?? (existingData.users[existingIndex] as any).first_name ?? '',
+          last_name: requestBody.last_name ?? (existingData.users[existingIndex] as any).last_name ?? '',
+          account_type: requestBody.account_type ?? (existingData.users[existingIndex] as any).account_type ?? 'Customer',
+          member: requestBody.member ?? (existingData.users[existingIndex] as any).member ?? false,
+          favourite_animals: requestBody.favourite_animals ?? (existingData.users[existingIndex] as any).favourite_animals ?? [],
+          saved_payment_methods: requestBody.saved_payment_methods ?? (existingData.users[existingIndex] as any).saved_payment_methods ?? []
+        };
+
+        existingData.users[existingIndex] = updatedUser as any;
+        addedData = { user: updatedUser } as UserPostResponse;
+        message = 'User updated successfully';
+
+        fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2));
+        return NextResponse.json({
+          message,
+          data: addedData,
+          totals: {
+            animals: existingData.animals.length,
+            events: existingData.events.length,
+            merchandise: existingData.merchandise.length,
+            users: existingData.users.length
+          }
+        }, { status: 200 });
+      }
+
+      // Create new user if not exists
       const completeUser: User = {
         id: requestBody.id || `user${String(existingData.users.length + 1).padStart(3, '0')}`,
         email: requestBody.email!,
-        first_name: requestBody.first_name!,
-        last_name: requestBody.last_name!,
-        account_type: 'Customer',
-        member: false,
-        favourite_animals: [],
-        saved_payment_methods: []
+        first_name: requestBody.first_name || '',
+        last_name: requestBody.last_name || '',
+        account_type: requestBody.account_type || 'Customer',
+        member: requestBody.member ?? false,
+        favourite_animals: requestBody.favourite_animals || [],
+        saved_payment_methods: requestBody.saved_payment_methods || []
       };
-
-      if (existingData.users.find(user => user.email === completeUser.email)) {
-        return NextResponse.json({ error: `User with email ${completeUser.email} already exists` }, { status: 409 });
-      }
 
       // Preserve file formatting by editing the users array text directly
       const contentToEdit = rawFileContent || JSON.stringify({ ...existingData, users: existingData.users }, null, 2);
