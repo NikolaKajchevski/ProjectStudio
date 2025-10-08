@@ -2,7 +2,7 @@ import Image from "next/image";
 import data from "../../data/zooliranteData.json";
 import ImageSlider from "@/app/components/ImageSlider";
 import { Vidaloka } from "next/font/google";
-import Cart from "@/app/components/ShoppingCart";
+import {Counter} from "@/app/components/ShoppingCart";
 import Link from 'next/link';
 
 
@@ -75,7 +75,7 @@ export default function MerchDetailsPage({ params }: any) {
                       style={{ objectFit: 'cover', float: 'left', marginLeft: '0%' }}
                       />
                        <p className="ml-5 text-center text-[2.5rem]" style={{float:'right'}}>Add to cart</p>
-                       <div style={{width: "3rem", height: "3rem", position: "relative" }} ><Cart/></div> {/*Displays number of item in the cart */}
+                       <div style={{width: "3rem", height: "3rem", position: "relative" }} ><Counter/></div> {/*Displays number of item in the cart */}
                      </button>
 
                     <p className="ml-20 mt-65 text-[1rem]">*Shipping not avaliable, pickup only</p>
