@@ -313,61 +313,13 @@
   ],
   "users": [
     {
-      "id": "user001",
-      "username": "giovanni_rossi",
-      "email": "dyeoi001@mymail.unisa.edu.au",
-      "first_name": "Oli",
-      "last_name": "Dyer",
-      "date_of_birth": "1985-03-15",
-      "phone": "+61 4 1234 5678",
-      "address": {
-        "street": "45 Collins Street",
-        "city": "Melbourne",
-        "state": "VIC",
-        "postal_code": "3000",
-        "country": "Australia"
-      },
-      "membership": {
-        "type": "Individual",
-        "status": "Active",
-        "start_date": "2024-01-15",
-        "expiry_date": "2025-01-15"
-      },
-      "favourite_animals": ["001"],
-      "saved_payment_methods": [
-        {
-          "id": "pm001",
-          "type": "Credit Card",
-          "last_four": "4532",
-          "expiry": "12/26",
-          "is_default": true
-        }
-      ],
-      "visit_history": [
-        {
-          "date": "2025-10-12",
-          "ticket_type": "Member Entry",
-          "special_events": ["evt002"]
-        },
-        {
-          "date": "2025-10-10",
-          "ticket_type": "Member Entry",
-          "special_events": []
-        }
-      ],
-      "purchase_history": [
-        {
-          "date": "2024-08-20",
-          "items": [
-            {
-              "item_id": "merch001",
-              "quantity": 1,
-              "price": 28.00
-            }
-          ],
-          "total": 28.00
-        }
-      ]
+      "email": "nkajchev@gmail.com",
+      "first_name": "Nik",
+      "last_name": "K",
+      "account_type": "admin",
+      "member": false,
+      "favourite_animals": [],
+      "saved_payment_methods": [] 
     }
   ],
   "zoo_map": {

@@ -42,6 +42,25 @@ interface Merchandise {
   featured_animal?: string;
 }
 
+interface PaymentMethod {
+  id: string;
+  type: string;
+  last_four: string;
+  expiry: string;
+  is_default: boolean;
+}
+
+interface User {
+  id: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  account_type: string;
+  member: boolean;
+  favourite_animals: string[];
+  saved_payment_methods: PaymentMethod[];
+}
+
 interface Event {
   id: string;
   title: string;
@@ -64,6 +83,7 @@ interface ZooData {
   animals: Animal[];
   events: Event[];
   merchandise: Merchandise[];
+  users: User[];
 }
 
 interface AnimalPostResponse {
@@ -78,23 +98,29 @@ interface MerchandisePostResponse {
   merchandise: Merchandise;
 }
 
+interface UserPostResponse {
+  user: User;
+}
+
 interface PostResponseData {
   animal: Animal;
   event: Event;
   merchandise: Merchandise;
+  user: User;
 }
 
 interface APIResponse {
   message?: string;
   error?: string;
   animals?: Animal[];
-  data?: Animal | AnimalPostResponse | EventPostResponse | MerchandisePostResponse;
+  data?: Animal | AnimalPostResponse | EventPostResponse | MerchandisePostResponse | UserPostResponse;
   totalAnimals?: number;
   details?: string;
   totals?: {
     animals: number;
     events: number;
     merchandise: number;
+    users: number;
   };
 }
 
@@ -116,7 +142,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<APIRespons
       return NextResponse.json({ animals: [animal] });
     }
 
-    return NextResponse.json(zooliranteData as ZooData);
+    return NextResponse.json(zooliranteData as unknown as ZooData);
   } catch (error) {
     console.error('GET Error:', error);
     return NextResponse.json({ error: 'Failed to fetch zoo data' }, { status: 500 });
@@ -133,13 +159,15 @@ export async function POST(request: NextRequest): Promise<NextResponse<APIRespon
     let existingData: ZooData = {
       animals: [],
       events: [],
-      merchandise: []
+      merchandise: [],
+      users: []
     };
 
+    let rawFileContent: string = '';
     if (fs.existsSync(filePath)) {
       console.log('File exists, reading...');
-      const fileContent: string = fs.readFileSync(filePath, 'utf-8');
-      existingData = JSON.parse(fileContent) as ZooData;
+      rawFileContent = fs.readFileSync(filePath, 'utf-8');
+      existingData = JSON.parse(rawFileContent) as ZooData;
       console.log('Existing data loaded');
     } else {
       console.log('File does not exist, creating new structure');
@@ -220,6 +248,112 @@ export async function POST(request: NextRequest): Promise<NextResponse<APIRespon
       existingData.merchandise.push(completeMerchandise);
       addedData = { merchandise: completeMerchandise };
       message = 'Merchandise added successfully';
+    } else if (requestBody.email && requestBody.first_name && requestBody.last_name) {
+      const completeUser: User = {
+        id: requestBody.id || `user${String(existingData.users.length + 1).padStart(3, '0')}`,
+        email: requestBody.email!,
+        first_name: requestBody.first_name!,
+        last_name: requestBody.last_name!,
+        account_type: 'Customer',
+        member: false,
+        favourite_animals: [],
+        saved_payment_methods: []
+      };
+
+      if (existingData.users.find(user => user.email === completeUser.email)) {
+        return NextResponse.json({ error: `User with email ${completeUser.email} already exists` }, { status: 409 });
+      }
+
+      // Preserve file formatting by editing the users array text directly
+      const contentToEdit = rawFileContent || JSON.stringify({ ...existingData, users: existingData.users }, null, 2);
+
+      const usersKeyIndex = contentToEdit.indexOf('"users"');
+      if (usersKeyIndex === -1) {
+        // If users key not found, fall back to normal write (adds users with default formatting)
+        existingData.users.push(completeUser);
+        addedData = { user: completeUser };
+        message = 'User added successfully';
+        fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2));
+      } else {
+        const colonIndex = contentToEdit.indexOf(':', usersKeyIndex);
+        const arrayStartIndex = contentToEdit.indexOf('[', colonIndex);
+
+        // Find matching closing bracket for the users array
+        let index = arrayStartIndex;
+        let depth = 0;
+        let arrayEndIndex = -1;
+        while (index < contentToEdit.length) {
+          const ch = contentToEdit[index];
+          if (ch === '[') depth++;
+          if (ch === ']') {
+            depth--;
+            if (depth === 0) {
+              arrayEndIndex = index;
+              break;
+            }
+          }
+          index++;
+        }
+
+        if (arrayEndIndex === -1) {
+          // Fallback if no matching end found
+          existingData.users.push(completeUser);
+          addedData = { user: completeUser };
+          message = 'User added successfully';
+          fs.writeFileSync(filePath, JSON.stringify(existingData, null, 2));
+        } else {
+          const arrayInner = contentToEdit.slice(arrayStartIndex + 1, arrayEndIndex);
+          const isEmpty = arrayInner.trim().length === 0;
+
+          // Determine indentation based on preceding whitespace before users key line
+          const lineStart = contentToEdit.lastIndexOf('\n', usersKeyIndex) + 1;
+          const lineIndentMatch = contentToEdit.slice(lineStart, usersKeyIndex).match(/^[\t ]*/);
+          const baseIndent = lineIndentMatch ? lineIndentMatch[0] : '';
+          const entryIndent = baseIndent + '  ';
+
+          const userJson = JSON.stringify(completeUser, null, 2)
+            .split('\n')
+            .map((line, i) => (i === 0 ? line : entryIndent + line))
+            .join('\n');
+
+          const insertion = (isEmpty ? '\n' + entryIndent + userJson + '\n' + baseIndent : '\n' + entryIndent + ',' + userJson.replace(/^/,'') + '\n' + baseIndent);
+
+          // If non-empty, we need to insert a comma before the new object.
+          let newContent: string;
+          if (isEmpty) {
+            newContent = contentToEdit.slice(0, arrayStartIndex + 1) + insertion + contentToEdit.slice(arrayEndIndex);
+          } else {
+            // Ensure there is a comma after the last existing entry if not already present
+            // Insert a comma + new entry before arrayEndIndex
+            // Find last non-whitespace before arrayEndIndex
+            let lastNonWs = arrayEndIndex - 1;
+            while (lastNonWs > arrayStartIndex && /\s/.test(contentToEdit[lastNonWs])) lastNonWs--;
+            const needsComma = contentToEdit[lastNonWs] !== ',';
+            const prefix = needsComma ? contentToEdit.slice(0, lastNonWs + 1) + ',' + contentToEdit.slice(lastNonWs + 1) : contentToEdit;
+            // Recompute arrayEndIndex relative to prefix length change
+            const endIdx = (needsComma ? arrayEndIndex + 1 : arrayEndIndex);
+            newContent = prefix.slice(0, endIdx) + insertion + prefix.slice(endIdx);
+          }
+
+          fs.writeFileSync(filePath, newContent);
+
+          // Update in-memory counts for response without rewriting file
+          existingData.users.push(completeUser);
+          addedData = { user: completeUser };
+          message = 'User added successfully';
+          // Return early response after write handled
+          return NextResponse.json({
+            message: message,
+            data: addedData,
+            totals: {
+              animals: existingData.animals.length,
+              events: existingData.events.length,
+              merchandise: existingData.merchandise.length,
+              users: existingData.users.length
+            }
+          }, { status: 201 });
+        }
+      }
     } else {
       return NextResponse.json({ error: 'Invalid data format provided' }, { status: 400 });
     }
@@ -233,7 +367,8 @@ export async function POST(request: NextRequest): Promise<NextResponse<APIRespon
       totals: {
         animals: existingData.animals.length,
         events: existingData.events.length,
-        merchandise: existingData.merchandise.length
+        merchandise: existingData.merchandise.length,
+        users: existingData.users.length
       }
     }, { status: 201 });
   } catch (error) {

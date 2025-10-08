@@ -22,6 +22,31 @@ const SignUp = () => {
       const res = await createUserWithEmailAndPassword(email, password);
       console.log({res});
       if (res) {
+        // Create user in our database
+        try {
+          const userData = {
+            email: email,
+            first_name: firstName,
+            last_name: lastName
+          };
+          
+          const response = await fetch('/api/zooliranteData', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+          });
+          
+          if (response.ok) {
+            console.log('User created in database successfully');
+          } else {
+            console.error('Failed to create user in database');
+          }
+        } catch (dbError) {
+          console.error('Database error:', dbError);
+        }
+        
         // Redirect to home page after successful sign up
         router.push('/');
       }

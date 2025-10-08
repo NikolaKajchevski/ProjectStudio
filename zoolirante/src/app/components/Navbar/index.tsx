@@ -2,11 +2,32 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useAuth } from '../../context/AuthContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Navbar() {
   const { user, loading, signOut } = useAuth();
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const loadAccountType = async () => {
+      if (!user?.email) {
+        setIsAdmin(false);
+        return;
+      }
+      try {
+        const res = await fetch('/api/zooliranteData');
+        const data = await res.json();
+        const matchedUser = Array.isArray(data?.users)
+          ? data.users.find((u: any) => u.email === user.email)
+          : null;
+        setIsAdmin((matchedUser?.account_type || '').toLowerCase() === 'admin');
+      } catch {
+        setIsAdmin(false);
+      }
+    };
+    loadAccountType();
+  }, [user?.email]);
 
   const handleSignOut = async () => {
     await signOut();
@@ -63,6 +84,9 @@ export default function Navbar() {
             <Link href="/shop" className="text-gray-600 hover:text-gray-900 font-medium">Shop</Link>
             <Link href="/membership" className="text-gray-600 hover:text-gray-900 font-medium">Membership</Link>
             <Link href="/aboutUs" className="text-gray-600 hover:text-gray-900 font-medium">About Us</Link>
+            {isAdmin && (
+              <Link href="/cms" className="text-gray-600 hover:text-gray-900 font-medium">CMS</Link>
+            )}
           </nav>
           
           {/* Authentication-based buttons */}
@@ -108,8 +132,6 @@ export default function Navbar() {
                     <Link href="/settingsPage" className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                       Settings
                     </Link>
-
-
                   </div>
                 )}
               </div>
