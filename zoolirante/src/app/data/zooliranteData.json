@@ -32,16 +32,10 @@
         "Can run up to 70 km/h",
         "Has the largest eyes of any land animal"
       ],
-      "feeding_times": [
-        "9:30 AM",
-        "3:30 PM"
-      ],
+      "feeding_times": ["9:30 AM", "3:30 PM"],
       "location": {
         "zone": "African Safari",
-        "coordinates": {
-          "x": 150,
-          "y": 200
-        }
+        "coordinates": { "x": 150, "y": 200 }
       },
       "conservation_status": "Least Concern",
       "image_url": "/images/animals/oscar-ostrich.jpg",
@@ -63,16 +57,10 @@
         "Roar can be heard up to 8 km away",
         "Lives in prides of up to 15 lions"
       ],
-      "feeding_times": [
-        "10:30 AM",
-        "4:00 PM"
-      ],
+      "feeding_times": ["10:30 AM", "4:00 PM"],
       "location": {
         "zone": "African Safari",
-        "coordinates": {
-          "x": 300,
-          "y": 150
-        }
+        "coordinates": { "x": 300, "y": 150 }
       },
       "conservation_status": "Vulnerable",
       "image_url": "/images/animals/leo-lion.jpg",
@@ -94,16 +82,10 @@
         "Can leap up to 3 meters high",
         "Can run up to 80 km/h"
       ],
-      "feeding_times": [
-        "9:00 AM",
-        "2:00 PM"
-      ],
+      "feeding_times": ["9:00 AM", "2:00 PM"],
       "location": {
         "zone": "Savanna Plains",
-        "coordinates": {
-          "x": 100,
-          "y": 350
-        }
+        "coordinates": { "x": 100, "y": 350 }
       },
       "conservation_status": "Least Concern",
       "image_url": "/images/animals/anya-antelope.jpg",
@@ -125,17 +107,10 @@
         "Can eat up to 30,000 insects a day",
         "Has a tongue up to 60 cm long"
       ],
-      "feeding_times": [
-        "10:00 AM",
-        "1:30 PM",
-        "4:30 PM"
-      ],
+      "feeding_times": ["10:00 AM", "1:30 PM", "4:30 PM"],
       "location": {
         "zone": "South American Rainforest",
-        "coordinates": {
-          "x": 250,
-          "y": 300
-        }
+        "coordinates": { "x": 250, "y": 300 }
       },
       "conservation_status": "Vulnerable",
       "image_url": "/images/animals/amelia-anteater.jpg",
@@ -143,58 +118,51 @@
         "/images/animals/amelia-1.jpg",
         "/images/animals/amelia-2.jpg"
       ]
+  },
+  {
+    "id": "005",
+    "name": "Gorilla George",
+    "species": "Western Lowland Gorilla",
+    "scientific_name": "Gorilla gorilla gorilla",
+    "habitat": "Tropical Forests",
+    "age": 12,
+    "gender": "Male",
+    "description": "George is a gentle giant gorilla who enjoys climbing, foraging, and interacting with his group.",
+    "fun_facts": [
+      "Can lift over 10 times his body weight",
+      "Communicates with a variety of vocalizations and gestures"
+    ],
+    "feeding_times": ["9:30 AM", "12:30 PM", "3:30 PM"],
+    "location": {
+      "zone": "African Jungle",
+      "coordinates": { "x": 180, "y": 250 }
     },
-    {
-      "id": "005",
-      "name": "Gorilla George",
-      "species": "Western Lowland Gorilla",
-      "scientific_name": "Gorilla gorilla gorilla",
-      "habitat": "Tropical Forests",
-      "age": 12,
-      "gender": "Male",
-      "description": "George is a gentle giant gorilla who enjoys climbing, foraging, and interacting with his group.",
-      "fun_facts": [
-        "Can lift over 10 times his body weight",
-        "Communicates with a variety of vocalizations and gestures"
-      ],
-      "feeding_times": [
-        "9:30 AM",
-        "12:30 PM",
-        "3:30 PM"
-      ],
-      "location": {
-        "zone": "African Jungle",
-        "coordinates": {
-          "x": 180,
-          "y": 250
-        }
-      },
-      "conservation_status": "Critically Endangered",
-      "image_url": "/images/animals/george-gorilla.jpg",
-      "gallery": [
-        "/images/animals/george-1.jpg",
-        "/images/animals/george-2.jpg"
-      ]
-    }
-  ],
+    "conservation_status": "Critically Endangered",
+    "image_url": "/images/animals/george-gorilla.jpg",
+    "gallery": [
+      "/images/animals/george-1.jpg",
+      "/images/animals/george-2.jpg"
+    ]
+  }
+],
+
+    
+
   "events": [
     {
       "id": "evt001",
       "title": "Wild Italy Parade",
       "description": "Join us for a spectacular parade featuring animals that represent the wildlife of Italy and surrounding regions.",
-      "date": "2025-10-12",
+      "date": "2024-09-15",
       "start_time": "2:00 PM",
       "end_time": "3:30 PM",
       "location": "Main Pathway",
       "category": "Parade",
-      "animals_featured": [
-        "001",
-        "003"
-      ],
+      "animals_featured": ["001", "003"],
       "capacity": 200,
       "current_bookings": 145,
       "ticket_required": true,
-      "additional_cost": 15,
+      "additional_cost": 15.00,
       "age_restriction": "All ages",
       "image_url": "/images/events/wild-italy-parade.jpg"
     },
@@ -202,18 +170,16 @@
       "id": "evt002",
       "title": "Penguin Feeding Experience",
       "description": "Get up close with Lorenzo and learn about penguin behavior while helping with feeding time.",
-      "date": "2025-10-12",
+      "date": "2024-09-12",
       "start_time": "11:00 AM",
       "end_time": "11:45 AM",
       "location": "Polar Paradise",
       "category": "Animal Interaction",
-      "animals_featured": [
-        "003"
-      ],
+      "animals_featured": ["003"],
       "capacity": 12,
       "current_bookings": 8,
       "ticket_required": true,
-      "additional_cost": 25,
+      "additional_cost": 25.00,
       "age_restriction": "6+",
       "image_url": "/images/events/penguin-feeding.jpg"
     },
@@ -221,18 +187,16 @@
       "id": "evt003",
       "title": "Panda Photography Workshop",
       "description": "Learn professional photography techniques while capturing beautiful moments with Sophia the panda.",
-      "date": "2025-10-12",
+      "date": "2024-09-20",
       "start_time": "9:30 AM",
       "end_time": "12:00 PM",
       "location": "Asian Gardens",
       "category": "Educational",
-      "animals_featured": [
-        "004"
-      ],
+      "animals_featured": ["004"],
       "capacity": 15,
       "current_bookings": 3,
       "ticket_required": true,
-      "additional_cost": 45,
+      "additional_cost": 45.00,
       "age_restriction": "12+",
       "image_url": "/images/events/panda-photography.jpg"
     }
@@ -241,25 +205,25 @@
     "general_admission": [
       {
         "type": "Adult",
-        "price": 35,
+        "price": 35.00,
         "description": "Full access to all exhibits and shows",
         "age_range": "13-64"
       },
       {
         "type": "Child",
-        "price": 20,
+        "price": 20.00,
         "description": "Full access to all exhibits and shows",
         "age_range": "3-12"
       },
       {
         "type": "Senior",
-        "price": 25,
+        "price": 25.00,
         "description": "Full access to all exhibits and shows",
         "age_range": "65+"
       },
       {
         "type": "Family Pass",
-        "price": 95,
+        "price": 95.00,
         "description": "2 Adults + 2 Children combo ticket",
         "age_range": "Family of 4"
       }
@@ -267,8 +231,8 @@
     "memberships": [
       {
         "type": "Individual",
-        "monthly_price": 25,
-        "annual_price": 250,
+        "monthly_price": 25.00,
+        "annual_price": 250.00,
         "benefits": [
           "Unlimited zoo entry",
           "10% discount on merchandise",
@@ -279,8 +243,8 @@
       },
       {
         "type": "Family",
-        "monthly_price": 45,
-        "annual_price": 450,
+        "monthly_price": 45.00,
+        "annual_price": 450.00,
         "benefits": [
           "Unlimited zoo entry for up to 2 adults + 3 children",
           "15% discount on merchandise",
@@ -297,13 +261,13 @@
       "id": "merch001",
       "name": "Marco the Lion Plush Toy",
       "category": "Plush Toys",
-      "price": 28,
+      "price": 28.00,
       "description": "Soft and cuddly plush version of our beloved lion Marco",
-      "image_url": "/images/merchandise/lion-plush-toy.webp",
+      "image_url": "/images/merchandise/marco-plush.jpg",
       "stock": 45,
       "image_extras": [
-        "/images/merchandise/marco-plush1.jfif",
-        "/images/merchandise/marco-plush2.jfif"
+      "/images/merchandise/marco-plush1.jfif",
+      "/images/merchandise/marco-plush2.jfif"
       ],
       "featured_animal": "001"
     },
@@ -311,40 +275,29 @@
       "id": "merch002",
       "name": "Zoolirante T-Shirt",
       "category": "Apparel",
-      "price": 22,
+      "price": 22.00,
       "description": "Comfortable cotton t-shirt with Zoolirante logo",
-      "sizes": [
-        "XS",
-        "S",
-        "M",
-        "L",
-        "XL",
-        "XXL"
-      ],
-      "colors": [
-        "Green",
-        "Blue",
-        "White"
-      ],
-      "image_url": "/images/merchandise/t-shirt.webp",
+      "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
+      "colors": ["Green", "Blue", "White"],
+      "image_url": "/images/merchandise/zoolirante-tshirt.jpg",
       "stock": 120
     },
     {
       "id": "merch003",
       "name": "Australian Wildlife Guide Book",
       "category": "Books",
-      "price": 18,
+      "price": 18.00,
       "description": "Comprehensive guide to Australian wildlife with beautiful photographs",
-      "image_url": "/images/merchandise/books.webp",
+      "image_url": "/images/merchandise/wildlife-guide.jpg",
       "stock": 30
     },
     {
       "id": "merch004",
       "name": "Penguin Information Sheet Set",
       "category": "Educational",
-      "price": 8,
+      "price": 8.00,
       "description": "Educational sheets about penguin species around the world",
-      "image_url": "/images/merchandise/penguin-book.webp",
+      "image_url": "/images/merchandise/penguin-info-sheets.jpg",
       "stock": 75,
       "featured_animal": "003"
     },
@@ -352,42 +305,69 @@
       "id": "merch005",
       "name": "Zoolirante Water Bottle",
       "category": "Accessories",
-      "price": 15,
+      "price": 15.00,
       "description": "Eco-friendly stainless steel water bottle with zoo branding",
-      "image_url": "/images/merchandise/bottle.webp",
+      "image_url": "/images/merchandise/water-bottle.jpg",
       "stock": 60
     }
   ],
   "users": [
     {
-      "id": "user002",
-      "email": "nkajchev@gmail.com",
-      "first_name": "Nik",
-      "last_name": "K",
-      "account_type": "admin",
-      "member": false,
-      "favourite_animals": [
-        "003"
-      ],
+      "id": "user001",
+      "username": "giovanni_rossi",
+      "email": "dyeoi001@mymail.unisa.edu.au",
+      "first_name": "Giovanni",
+      "last_name": "Rossi",
+      "date_of_birth": "1985-03-15",
+      "phone": "+61 4 1234 5678",
+      "address": {
+        "street": "45 Collins Street",
+        "city": "Melbourne",
+        "state": "VIC",
+        "postal_code": "3000",
+        "country": "Australia"
+      },
+      "membership": {
+        "type": "Individual",
+        "status": "Active",
+        "start_date": "2024-01-15",
+        "expiry_date": "2025-01-15"
+      },
+      "favourite_animals": ["001", "004"],
       "saved_payment_methods": [
         {
-          "id": "pm_1759922986619",
-          "type": "card",
-          "last_four": "2312",
-          "expiry": "01/05",
+          "id": "pm001",
+          "type": "Credit Card",
+          "last_four": "4532",
+          "expiry": "12/26",
           "is_default": true
         }
+      ],
+      "visit_history": [
+        {
+          "date": "2025-10-12",
+          "ticket_type": "Member Entry",
+          "special_events": ["evt002"]
+        },
+        {
+          "date": "2025-10-10",
+          "ticket_type": "Member Entry",
+          "special_events": []
+        }
+      ],
+      "purchase_history": [
+        {
+          "date": "2024-08-20",
+          "items": [
+            {
+              "item_id": "merch001",
+              "quantity": 1,
+              "price": 28.00
+            }
+          ],
+          "total": 28.00
+        }
       ]
-    },
-    {
-      "id": "user002",
-      "email": "nikolceka@gmail.com",
-      "first_name": "nik",
-      "last_name": "k",
-      "account_type": "admin",
-      "member": false,
-      "favourite_animals": [],
-      "saved_payment_methods": []
     }
   ],
   "zoo_map": {
@@ -403,14 +383,8 @@
           "width": 150,
           "height": 100
         },
-        "animals": [
-          "001"
-        ],
-        "facilities": [
-          "Restaurant",
-          "Gift Shop",
-          "Restrooms"
-        ]
+        "animals": ["001"],
+        "facilities": ["Restaurant", "Gift Shop", "Restrooms"]
       },
       {
         "id": "australian_bush",
@@ -423,13 +397,8 @@
           "width": 120,
           "height": 120
         },
-        "animals": [
-          "002"
-        ],
-        "facilities": [
-          "Picnic Area",
-          "Information Center"
-        ]
+        "animals": ["002"],
+        "facilities": ["Picnic Area", "Information Center"]
       },
       {
         "id": "polar_paradise",
@@ -442,13 +411,8 @@
           "width": 100,
           "height": 80
         },
-        "animals": [
-          "003"
-        ],
-        "facilities": [
-          "Viewing Platform",
-          "Cafe"
-        ]
+        "animals": ["003"],
+        "facilities": ["Viewing Platform", "Cafe"]
       },
       {
         "id": "asian_gardens",
@@ -461,14 +425,8 @@
           "width": 130,
           "height": 110
         },
-        "animals": [
-          "004"
-        ],
-        "facilities": [
-          "Meditation Garden",
-          "Tea House",
-          "Souvenir Shop"
-        ]
+        "animals": ["004"],
+        "facilities": ["Meditation Garden", "Tea House", "Souvenir Shop"]
       }
     ],
     "pathways": [
@@ -494,22 +452,10 @@
       }
     ],
     "facilities": {
-      "entrance": {
-        "x": 200,
-        "y": 50
-      },
-      "main_restaurant": {
-        "x": 180,
-        "y": 180
-      },
-      "first_aid": {
-        "x": 160,
-        "y": 200
-      },
-      "parking": {
-        "x": 200,
-        "y": 20
-      }
+      "entrance": { "x": 200, "y": 50 },
+      "main_restaurant": { "x": 180, "y": 180 },
+      "first_aid": { "x": 160, "y": 200 },
+      "parking": { "x": 200, "y": 20 }
     }
   },
   "staff_roles": [
