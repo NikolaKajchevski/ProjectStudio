@@ -142,7 +142,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<APIRespons
       return NextResponse.json({ animals: [animal] });
     }
 
-    return NextResponse.json(zooliranteData as ZooData);
+    return NextResponse.json(zooliranteData as unknown as ZooData);
   } catch (error) {
     console.error('GET Error:', error);
     return NextResponse.json({ error: 'Failed to fetch zoo data' }, { status: 500 });
