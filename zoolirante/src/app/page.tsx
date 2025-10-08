@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import NotificationSender from "./components/EmailNotification/NotificationSender";
 
 
 export default async function Home() {
@@ -16,9 +15,7 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="hidden">
-        <NotificationSender />
-      </div>
+
 
       {/* Top Section */}
       <section className="relative h-96 bg-cover bg-center bg-no-repeat flex items-center justify-center text-white" 
