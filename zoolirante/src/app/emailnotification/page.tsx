@@ -8,7 +8,7 @@ export default function NotificationSender() {
   const [status, setStatus] = useState<string>("");
 
   const formatDate = (date: string | number | Date) =>
-    new Date(date).toISOString().split("T")[0];
+    new Date(date).toLocaleDateString();
 
   const sendNotifications = () => {
     setStatus("Sending notifications...");
@@ -18,44 +18,51 @@ export default function NotificationSender() {
     oneWeekFromNow.setDate(today.getDate() + 7);
 
     zooData.users.forEach(user => {
-      // Example: Filter events by favourite animals
-      const upcomingFavouriteEvents = (zooData.events || []).filter(event => {
+      const upcomingFavouriteEvents = zooData.events.filter(event => {
         const eventDate = new Date(event.date);
         return (
-          event.animals_featured.some((id: string) => user.favourite_animals.includes(id)) &&
+          event.animals_featured.some(id => user.favourite_animals.includes(id)) &&
           eventDate >= today &&
           eventDate <= oneWeekFromNow
         );
       });
 
-      // Example: Filter upcoming visits
       const upcomingVisits = user.visit_history.filter(visit => {
         const visitDate = new Date(visit.date);
         return visitDate >= today && visitDate <= oneWeekFromNow;
       });
 
-      // Skip if nothing to notify
-      if (upcomingFavouriteEvents.length === 0 && upcomingVisits.length === 0) {
-        console.log(`⚪ No upcoming notifications for ${user.email}`);
-        return;
-      }
-
-      console.log(`📧 Preparing to send email to ${user.email}`);
+      if (upcomingFavouriteEvents.length === 0 && upcomingVisits.length === 0) return;
 
       let message = `Hi ${user.first_name},\n\n`;
 
+      // Add favourite events
       if (upcomingFavouriteEvents.length > 0) {
         message += `🐾 Events featuring your favourite animals this week:\n`;
         upcomingFavouriteEvents.forEach(event => {
-          message += `• ${event.title} on ${formatDate(event.date)} at ${event.location}\n`;
+          message += `• "${event.title}" on ${formatDate(event.date)} at ${event.location}\n`;
         });
         message += "\n";
       }
 
+      // Add visit reminders
       if (upcomingVisits.length > 0) {
-        message += `📅 Reminder: You have a visit booked this week!\n\n`;
+        message += `📅 Reminders for your upcoming visits this week:\n`;
+        upcomingVisits.forEach(visit => {
+          // Find events linked to the visit (if any)
+          const visitEvents = zooData.events.filter(event =>
+            visit.special_events.includes(event.id)
+          );
+
+          visitEvents.forEach(event => {
+            message += `• "${event.title}" on ${formatDate(event.date)} at ${event.location}\n`;
+          });
+
+        });
+        message += "\n";
       }
 
+      // Add member benefit
       message += `🎁 This month's member benefit: Free souvenir photo at any event!\n\n`;
       message += `See you soon,\nZoolirante Team 🦘`;
 
@@ -66,10 +73,10 @@ export default function NotificationSender() {
       };
 
       emailjs.send(
-        "service_rz5dvua",        // Your EmailJS service ID
-        "template_xrkqwwz",       // Your EmailJS template ID
+        "service_rz5dvua",
+        "template_xrkqwwz",
         templateParams,
-        "xcxMvt-bjNmhYQVQx"       // Your EmailJS public key
+        "xcxMvt-bjNmhYQVQx"
       )
       .then(
         result => console.log(`✅ Sent to ${user.email}:`, result.text),
@@ -93,4 +100,4 @@ export default function NotificationSender() {
       {status && <p className="text-gray-700 mt-2">{status}</p>}
     </div>
   );
-}
+} 
