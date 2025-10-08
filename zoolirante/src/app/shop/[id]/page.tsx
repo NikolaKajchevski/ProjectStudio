@@ -1,7 +1,6 @@
 import Image from "next/image";
 import data from "../../data/zooliranteData.json";
 import ImageSlider from "@/app/components/ImageSlider";
-import { Vidaloka } from "next/font/google";
 
 export default function MerchDetailsPage({ params }: any) {
   // Find merchandise
@@ -16,19 +15,16 @@ export default function MerchDetailsPage({ params }: any) {
                   
                 <div className="relative rounded-lg overflow-hidden shadow-lg bg-black" style={{float: 'left', maxHeight: '1200px' , maxWidth:'1900px' , width: '56.25%' , height: '56.25%', marginLeft: '10%', marginTop: '10%'}}>
                   <ImageSlider
-                imageUrls={imagelist} // Todo: add additonal images in database {[merchandise.image_url, merchandise.image_url2]}
+                imageUrls={[merchandise.image_url, merchandise.image_url]} // Todo: add support to map over an array if updating database
                // alt={merchandise.name}
                // fill
                 //style={{ objectFit: 'cover' }}
                   />
                 </div>
-                
-
-
                 <div className=" rounded-lg bg-orange-500" style={{float: 'right', marginRight: '5%', width: '23.75%', height: '56.25%', marginTop: '10%'}}>
                   <div className="bg-orange-400" style={{height:'50%'}}>
                     <h1 className="text-[4rem] text-center font-bold" >{merchandise.name}</h1>
-                    <p className="mt-5 text-center text-2.5rem">{merchandise.description}</p>
+                    <p className="mt-5 text-center text-[2.5rem">{merchandise.description}</p>
                   </div>
 
                   <div className="relative" > 
