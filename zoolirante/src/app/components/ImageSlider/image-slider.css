@@ -1,0 +1,24 @@
+
+
+
+
+.img-slider-img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: block;
+    flex-shrink: 0;
+    flex-grow: 0;
+    transition: translate 500ms ease-in-out;
+    
+}
+
+.img-slider-btn {
+    position: absolute;
+    display: block;
+    padding:1rem;
+    width: 60px;
+    height: 60px;
+    opacity: 0.5;
+    z-index: 9999;
+}
