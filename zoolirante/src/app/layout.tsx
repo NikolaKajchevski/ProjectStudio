@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Providers from "./providers";
+import NotificationWrapper from './components/NotificationWrapper';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <NotificationWrapper />
         </Providers>
       </body>
     </html>

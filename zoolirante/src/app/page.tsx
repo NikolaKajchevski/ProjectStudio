@@ -2,10 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home() {
-    const data = await fetch('http://localhost:3000/api/zooliranteData', {
+  const data = await fetch('http://localhost:3000/api/zooliranteData', {
     cache: 'no-store'
   });
   const zooData = await data.json();
+  
+  // Filter specific animals: lion, gorilla, and antelope
+  const featuredAnimals = zooData.animals.filter((animal: any) => 
+    ['002', '005', '003'].includes(animal.id)
+  );
+
   return (
     <div className="min-h-screen bg-white">
 
@@ -28,7 +34,6 @@ export default async function Home() {
                 Explore Animals
               </button>
             </Link>
-            
           </div>
         </div>
       </section>
@@ -42,81 +47,55 @@ export default async function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            {/* Lion */}
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="h-64 bg-cover bg-center bg-no-repeat" 
-                   style={{backgroundImage: "url('https://tse1.mm.bing.net/th/id/OIP.FsPPulKwUf3gIsS9UrZi4QAAAA?rs=1&pid=ImgDetMain&o=7&rm=3')"}}>
+            {featuredAnimals.map((animal: any) => (
+              <div key={animal.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                <div className="relative h-64">
+                  <Image
+                    src={animal.image_url}
+                    alt={animal.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{animal.name}</h3>
+                  <p className="text-gray-600 mb-4">{animal.description}</p>
+                  <Link href={`/animals/${animal.id}`} className="text-orange-500 hover:text-orange-600 font-medium">
+                    Learn More →
+                  </Link>
+                </div>
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">African Lions</h3>
-                <p className="text-gray-600 mb-4">Experience the majesty of the king of the jungle in our spacious African savanna habitat.</p>
-                <Link href="/animals/lions" className="text-orange-500 hover:text-orange-600 font-medium">
-                  Learn More →
-                </Link>
-              </div>
-            </div>
-
-            {/* Elephant */}
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="h-64 bg-cover bg-center bg-no-repeat" 
-                   style={{backgroundImage: "url('https://static.wixstatic.com/media/2fdcf0_799ec75bf4a0438f8f4ef8601a6ebf11~mv2.jpeg/v1/fill/w_980,h_652,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/2fdcf0_799ec75bf4a0438f8f4ef8601a6ebf11~mv2.jpeg')"}}>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">Asian Elephants</h3>
-                <p className="text-gray-600 mb-4">Watch these gentle giants in their naturalistic environment with daily keeper talks.</p>
-                <Link href="/animals/elephants" className="text-orange-500 hover:text-orange-600 font-medium">
-                  Learn More →
-                </Link>
-              </div>
-            </div>
-
-            {/* Penguins */}
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-              <div className="h-64 bg-cover bg-center bg-no-repeat" 
-                   style={{backgroundImage: "url('https://wildnet.org/wp-content/uploads/2018/03/Susan-McConnell-Penguin-3.jpg')"}}>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">Little Penguins</h3>
-                <p className="text-gray-600 mb-4">Dive into the underwater world of Australia's native little penguins.</p>
-                <Link href="/animals/penguins" className="text-orange-500 hover:text-orange-600 font-medium">
-                  Learn More →
-                </Link>
-              </div>
-            </div>
-
+            ))}
           </div>
         </div>
       </section>
 
       {/* Upcoming Events Section */}
       <section className="py-16 bg-white">
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">Upcoming Events & Experiences</h2>
             <p className="text-gray-600 text-lg">Join us for exciting events and educational programs</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {zooData.events.slice(0, 3).map((events: any) => {
+            {zooData.events.slice(0, 3).map((event: any) => {
               return (
-                <div key={events.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
-                  <div className="text-orange-500 text-1x2 font-semibold mb-2">
-                    {events.category}
+                <div key={event.id} className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
+                  <div className="text-orange-500 text-xl font-semibold mb-2">
+                    {event.category}
                   </div>
                   <h3 className="text-xl font-bold mb-2">
-                    {events.name}
+                    {event.title}
                   </h3>
                   <p className="text-gray-600 mb-4">
-                    {events.description}
+                    {event.description}
                   </p>
                   <div className="text-sm text-gray-500 mb-4">
-                    <div>📅 {events.date} | {events.start_time} - {events.end_time}</div>
-                    <div>📍 {events.location}</div>
+                    <div>📅 {event.date} | {event.start_time} - {event.end_time}</div>
+                    <div>📍 {event.location}</div>
                   </div>
-                  <Link href="/events">
+                  <Link href={`/events`}>
                     <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded font-medium transition-colors">
                       More Info
                     </button>
@@ -124,54 +103,12 @@ export default async function Home() {
                 </div>
               )
             })}
-            {/* Keeper Talk */}
-            {/* <div className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
-              <div className="text-orange-500 text-sm font-semibold mb-2">DAILY EVENT</div>
-              <h3 className="text-xl font-bold mb-2">Lion Keeper Talk</h3>
-              <p className="text-gray-600 mb-4">Join our expert keepers for an intimate look into the lives of our magnificent lions.</p>
-              <div className="text-sm text-gray-500 mb-4">
-                <div>📅 Daily at 11:00 AM & 3:00 PM</div>
-                <div>📍 African Savanna Zone</div>
-              </div>
-              <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded font-medium transition-colors">
-                More Info
-              </button>
-            </div> */}
-
-            {/* Special Tour */}
-            {/* <div className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
-              <div className="text-orange-500 text-sm font-semibold mb-2">SPECIAL EVENT</div>
-              <h3 className="text-xl font-bold mb-2">Twilight Zoo Tour</h3>
-              <p className="text-gray-600 mb-4">Experience the zoo after dark and see how our nocturnal animals come to life.</p>
-              <div className="text-sm text-gray-500 mb-4">
-                <div>📅 25th September, Saturday 6:00 PM</div>
-                <div>📍 Main Entrance</div>
-              </div>
-              <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded font-medium transition-colors">
-                Book Now
-              </button>
-            </div> */}
-
-            {/* Educational Program */}
-            {/* <div className="border border-gray-200 rounded-lg p-6 hover:shadow-lg transition-shadow">
-              <div className="text-orange-500 text-sm font-semibold mb-2">EDUCATION</div>
-              <h3 className="text-xl font-bold mb-2">Junior Zookeeper Program</h3>
-              <p className="text-gray-600 mb-4">Kids can learn about animal care and conservation through hands-on activities.</p>
-              <div className="text-sm text-gray-500 mb-4">
-                <div>📅 Weekends 10:00 AM - 12:00 PM</div>
-                <div>📍 Education Center</div>
-              </div>
-              <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded font-medium transition-colors">
-                Register
-              </button>
-            </div> */}
           </div>
         </div>
       </section>
 
       {/* Merchandise Section */}
       <section className="py-16 bg-gray-50">
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-800 mb-4">Zoo Shop</h2>
@@ -183,7 +120,7 @@ export default async function Home() {
             {/* Plush Toys */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
               <div className="h-64 bg-cover bg-center bg-no-repeat" 
-                   style={{backgroundImage: "url('https://tse1.mm.bing.net/th/id/OIP.gPW3DT06aHuCVM1DavJEJgHaIG?rs=1&pid=ImgDetMain&o=7&rm=3')"}}>
+                   style={{backgroundImage: "url('https://auroragift.com/cdn/shop/files/50264.jpg?v=1753990279')"}}>
               </div>
               <div className="p-4">
                 <h3 className="font-bold mb-2">Plush Animals</h3>
@@ -276,32 +213,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-
-      {/* <footer className="bg-gray-800 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-lg font-bold mb-4">About Zoolirante</h3>
-              <p className="text-gray-300 text-sm mb-4">
-                We're committed to wildlife conservation and education. Visit us to learn about animals from around the world.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-lg font-bold mb-4">Contact Us</h3>
-              <div className="space-y-2 text-sm text-gray-300">
-                <p>📞 (08) 1234 5678</p>
-                <p>✉️ info@zoolirante.com</p>
-                <p>📍 123 Wildlife Avenue<br/>Mawson Lakes, SA 5095</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-            <p>&copy; 2025 Zoolirante. All rights reserved. | Privacy Policy | Terms of Service</p>
-          </div>
-        </div>
-      </footer> */}
       
     </div>
   );
