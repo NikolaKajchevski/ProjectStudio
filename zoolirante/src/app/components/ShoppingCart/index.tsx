@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Item from "@/app/components/Item";
@@ -16,21 +16,81 @@ export function Counter(){
     )
 }
 
+interface Merchandise {
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  price: number;
+  image_url: string;
+}
+
+
+interface ZooData {
+  merchandise: Merchandise[];
+}
 
 export default function Cart(){
   const [open, setOpen] = useState(false);
+  const [zooData, setZooData] = useState<ZooData>({ merchandise: [] });
+    const [searchTerm, setSearchTerm] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('All');
+ 
   // Example cart items {id, name, price, category, description, image_url}
   // Replace this once cart functionality is added, Quanity cannot be set to zero or pricing will break. Remove items out of the array for removing items out of the cart.
-  var items = [
-    { id: "merch001", name: "Zoo Merch1", price: 59, category: "Merch", description: "example merch 1", image_url : '/images/merchandise/marco-plush.jpg' , quanity: 1 },
-    { id: "merch002", name: "Zoo Merch2", price: 76, category: "Merch", description: "example merch 2", image_url : '/images/merchandise/zoolirante-tshirt.jpg' , quanity: 1 },
-    { id: "merch003", name: "Zoo Merch3", price: 67, category: "Merch", description: "example merch 3", image_url : '/images/merchandise/wildlife-guide.jpg' , quanity: 2},
-    { id: "merch004", name: "Zoo Merch3", price: 9, category: "Merch", description: "example merch 4", image_url : '/images/merchandise/wildlife-guide.jpg' , quanity: 1},
-    { id: "merch005", name: "Zoo Merch3", price: 21, category: "Merch", description: "example merch 5", image_url : '/images/merchandise/wildlife-guide.jpg' , quanity: 1},
-
+  var items: string[] = [ // render
   ];
+
   count = items.length
+
+
+  // Fetch data
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetch('http://localhost:3000/api/zooliranteData', {
+          cache: 'no-store'
+        });
+        const zooDataResponse = await data.json();
+        setZooData(zooDataResponse);
+      } catch (error) {
+        console.error('Failed to fetch zoo data:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
+// Get unique category options
+  const categoryOptions = useMemo(() => {
+    const categories = Array.from(new Set(zooData.merchandise.map(merch => merch.category)));
+    return ['All', ...categories];
+  }, [zooData.merchandise]);
+
+  // Filter merchandise based on search and category filter
+  const filteredMerchandise = useMemo(() => {
+    return zooData.merchandise.filter(merch => {
+      const matchesSearch = !searchTerm || 
+        merch.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        merch.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        merch.description.toLowerCase().includes(searchTerm.toLowerCase());
+
+      const matchesCategory = categoryFilter === 'All' || merch.category === categoryFilter;
+
+      return matchesSearch && matchesCategory;
+    });
+  }, [zooData.merchandise, searchTerm, categoryFilter]);
+
   
+          const getcart = () => {
+            if (typeof window !== 'undefined') {
+                var cartArray = JSON.parse(localStorage.getItem('cart') || '[]')
+                return cartArray
+            }
+        }
+        const cartArrays = getcart()
+        console.log(cartArrays)
+
+
     return(
             <><button
             onClick={() => setOpen(true)}
@@ -43,8 +103,18 @@ export default function Cart(){
 
             <Counter />
         </button>
-        
-        
+        {filteredMerchandise.map((merch: Merchandise) => {
+            for (var i = 0; i < cartArrays.length; i++) {
+                if (cartArrays[i].key == merch.id && cartArrays[i].value > 0) {
+                    items.push({ id: merch.id, name: merch.name, price: merch.price, category: merch.category, description: merch.description, image_url: merch.image_url  , quanity: cartArrays[i].value })
+                    count = count + cartArrays[i].value
+                }
+            }
+        })}
+         {/* {filteredMerchandise.map((merch: Merchandise) => {
+                console.log({...merch})
+                    for
+            })} */}
         
         
         {open && (
@@ -70,9 +140,10 @@ export default function Cart(){
               </button>
             </div>
 
-            {/* Cart items */}
+
             <div className="p-4 space-y-3 overflow-y-auto h-[calc(100%-140px)]">
-              {items.length > 0 ? (
+              {
+              items.length > 0 ? (
                 items.map((item) => (
                   <div
                     key={item.id}
@@ -88,7 +159,7 @@ export default function Cart(){
                 </p>
               )}
             </div>
-
+            
             {/* Footer */}
             <div className="absolute bottom-0 w-full border-t p-4 bg-white">
               <div className="flex justify-between mb-3">
@@ -116,7 +187,7 @@ export default function Cart(){
 
           </>
         )}
-
+    
         
         </>
 
