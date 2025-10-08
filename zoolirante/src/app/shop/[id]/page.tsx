@@ -2,6 +2,9 @@ import Image from "next/image";
 import data from "../../data/zooliranteData.json";
 import ImageSlider from "@/app/components/ImageSlider";
 import { Vidaloka } from "next/font/google";
+import Cart from "@/app/components/ShoppingCart";
+import Link from 'next/link';
+
 
 export default function MerchDetailsPage({ params }: any) {
   // Find merchandise
@@ -25,6 +28,8 @@ export default function MerchDetailsPage({ params }: any) {
   return (
     <div className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8 py-15">
             <div className="relative w-full h-400 rounded-lg overflow-hidden shadow-lg bg-white">
+
+              
                   
                 <div className="relative rounded-lg overflow-hidden shadow-lg bg-black" style={{float: 'left', maxHeight: '1200px' , maxWidth:'1900px' , width: '56.25%' , height: '56.25%', marginLeft: '10%', marginTop: '10%'}}>
 
@@ -42,6 +47,9 @@ export default function MerchDetailsPage({ params }: any) {
               style={{objectFit: 'cover'}}
             />
                 )}
+
+
+                
                 </div>
                 
 
@@ -55,7 +63,13 @@ export default function MerchDetailsPage({ params }: any) {
                   <div className="relative" > 
                     <p className="ml-20 mt-10 text-[1.5rem]">{merchandise.category}</p>
                     <p className="ml-20 mt-0 text-[1.5rem]">${merchandise.price}</p>
-                      <button  className=" mt-15 bg-orange-400 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors" style={{float: 'right', marginRight: '33%', alignContent: 'center'}} > {/*Todo: link to cart page */}
+                    <Link href={`/cart/`}>
+                      <button  className=" mt-8 bg-orange-400 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors" style={{float: 'left', marginLeft: '10%', alignContent: 'center'}} > {/*Todo: link to cart page */}
+                        <p className="ml-5 text-center text-[2.5rem]" >Buy Now</p>
+                     </button>
+                    </Link>
+                      {/* CART BUTTON  */}
+                      <button  className=" mt-8 bg-orange-400 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors" style={{float: 'left', marginLeft: '10%', alignContent: 'center'}} > {/*Todo: Update cart number of item */}
                        <Image
                       src={"/cart.png"}
                       alt="shop icon"
@@ -63,7 +77,8 @@ export default function MerchDetailsPage({ params }: any) {
                       height={50}
                       style={{ objectFit: 'cover', float: 'left', marginLeft: '0%' }}
                       />
-                       <p className="ml-5 text-center text-[2.5rem]" style={{float:'right'}}>Order</p>
+                       <p className="ml-5 text-center text-[2.5rem]" style={{float:'right'}}>Add to cart</p>
+                       <div style={{width: "3rem", height: "3rem", position: "relative" }} ><Cart/></div> {/*Displays number of item in the cart */}
                      </button>
 
                     <p className="ml-20 mt-65 text-[1rem]">*Shipping not avaliable, pickup only</p>
