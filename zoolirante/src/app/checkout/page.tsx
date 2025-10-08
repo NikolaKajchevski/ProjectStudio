@@ -63,6 +63,7 @@ export default function checkout() {
             }
         }
         const cartArrays = getcart()
+        var cost = 0;
         console.log(cartArrays)
         return (
         <div className="min-h-screen bg-gray-200">
@@ -81,7 +82,7 @@ export default function checkout() {
                         {zooData.merchandise.map((merch: any) => {
                             for (var i = 0; i < cartArrays.length; i++) { 
                                 if (cartArrays[i].key == merch.id && cartArrays[i].value > 0) {
-                                    console.log('hi')
+                                    cost = (merch.price * cartArrays[i].value) + cost
                                     return (
                                         <div key={merch.id} className="bg-orange-50 rounded-lg shadow-md overflow-hidden border border-gray-300 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 mx-auto">
                                             <div className="py-10 mx-auto"> 
@@ -212,15 +213,32 @@ export default function checkout() {
 
                 {/* Order Summary */}
                 <div className="space-y-1">
-
                     <h2 className="font-bold">Order Summary</h2>
+                    {zooData.merchandise.map((merch: any) => {
+                        for (var i = 0; i < cartArrays.length; i++) { 
+                            if (cartArrays[i].key == merch.id && cartArrays[i].value > 0) {
+                                var total = merch.price * cartArrays[i].value
+                                return (
+                                    <div key={merch.id}>
+                                        <h1 className="font-bold mb-2">
+                                        {merch.name}
+                                        </h1>
+                                        <h2 className="font-bold mb-2">
+                                        ${total}, Quantity: x{cartArrays[i].value}
+                                        </h2>                                                                                                
+                                    </div>                                       
+                                )
+                            }                            
+                        }
+                    })}
+                    <h2 className="font-bold">Total: ${cost}</h2>
                 </div>
 
-            <button
-                type="submit"
-                className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors w-full">
+            <Link href="/checkout/confirmation">
+                <button className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600 transition-colors w-full">
                 Confirm
-            </button>
+                </button>
+            </Link>
             </form>
             
         </div>
