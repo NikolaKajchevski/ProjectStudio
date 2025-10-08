@@ -25,6 +25,7 @@ export default function Shop() {
   const [zooData, setZooData] = useState<ZooData>({ merchandise: [] });
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('All');
+ 
 
   // Fetch data
   useEffect(() => {
@@ -61,6 +62,46 @@ export default function Shop() {
       return matchesSearch && matchesCategory;
     });
   }, [zooData.merchandise, searchTerm, categoryFilter]);
+
+    const deleteCart = (id: string) => {
+      var cartArray = JSON.parse(localStorage.getItem('cart') || '[]')
+      for (var i = 0; i < cartArray.length; i++) {
+        if (cartArray[i].key == id) {
+          if (cartArray[i].value > 0) {
+            cartArray[i].value = cartArray[i].value - 1
+            if (cartArray[i].value == 0) {
+              cartArray[i] == ''
+            }
+          }
+        }
+      }
+      localStorage.setItem('cart', JSON.stringify(cartArray))
+    }
+
+    const addCart = (id: string) => {
+        var cartArray = JSON.parse(localStorage.getItem('cart') || '[]')
+        var cartCheck = []
+        var item = {key: id, value: 1};
+        for (var i = 0; i < cartArray.length; i++) {
+          if (cartArray[i] == null) {
+            cartArray[i] == ''
+          }
+          else {
+            cartCheck.push(cartArray[i].key)
+            if (cartArray[i].key == id) {
+                cartArray[i].value = cartArray[i].value + 1
+            }
+          }
+        }
+        if (!cartCheck.includes(id)) {
+            cartArray.push(item)
+        }
+        localStorage.setItem('cart', JSON.stringify(cartArray))
+        console.log(cartArray[1].value)
+        console.log(cartCheck)
+        console.log('test') 
+
+    }
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -121,7 +162,24 @@ export default function Shop() {
         {filteredMerchandise.map((merch: Merchandise) => (
           <div key={merch.id} className='bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow'>
           <Item {...merch}/>
+          <button
+          className="text-center border border-orange-500 font-bold text-orange-500 px-2 py-1 rounded-full text-sm hover:bg-orange-600 transition-colors"
+          onClick={(e: React.FormEvent) => {
+            addCart(merch.id)
+          }}
+          >
+            Add To Cart
+          </button>
+          <button
+          className="text-center border border-orange-500 font-bold text-orange-500 px-2 py-1 rounded-full text-sm hover:bg-orange-600 transition-colors"
+          onClick={(e: React.FormEvent) => {
+            deleteCart(merch.id)
+          }}
+          >
+            Remove From Cart
+          </button>
           </div>
+
         ))}
       </div>
 
