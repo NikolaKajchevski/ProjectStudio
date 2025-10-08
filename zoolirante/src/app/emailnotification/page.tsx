@@ -67,7 +67,7 @@ export default function NotificationSender() {
         message += "\n";
       }
 
-      // Add member benefit
+      // Add member benefits
       message += `🎁 This month's member benefit: Free souvenir photo at any event!\n\n`;
       message += `See you soon,\nZoolirante Team 🦘`;
 
