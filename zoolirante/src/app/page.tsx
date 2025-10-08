@@ -95,7 +95,7 @@ export default async function Home() {
                     <div>📅 {event.date} | {event.start_time} - {event.end_time}</div>
                     <div>📍 {event.location}</div>
                   </div>
-                  <Link href={`/events/${event.id}`}>
+                  <Link href={`/events`}>
                     <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded font-medium transition-colors">
                       More Info
                     </button>

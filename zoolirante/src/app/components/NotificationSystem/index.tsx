@@ -298,7 +298,7 @@ const NotificationSystem: React.FC<NotificationSystemProps> = ({
 
       {/* Popup Notification */}
       {activePopup && (
-        <div className="fixed bottom-8 right-8 w-96 bg-white rounded-lg shadow-2xl z-50 animate-bounce">
+        <div className="fixed bottom-8 right-8 w-96 bg-white rounded-lg shadow-2xl z-50 animate-fade-in">
           <div className={`${getPriorityColor(activePopup.priority)} text-white p-4 rounded-t-lg flex items-center justify-between`}>
             <div className="flex items-center gap-2">
               {getIcon(activePopup.icon)}
