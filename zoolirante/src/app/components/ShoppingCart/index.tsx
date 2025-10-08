@@ -172,7 +172,7 @@ export default function Cart(){
                 </span>
               </div>
             {/* Redirect to Cart page */}
-            <Link href={`/cart/`}>
+            <Link href={`/checkout`}>
               <button
                 onClick={() => console.log("checkout")} // TODO: transfer cart items to cart page here
                 className="w-full text-white py-2 rounded bg-orange-400 hover:bg-orange-600"
