@@ -160,24 +160,24 @@ export default function Shop() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredMerchandise.map((merch: Merchandise) => (
-          <div key={merch.id} className='bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow'>
+          <div key={merch.id} className='bg-white rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow justify-between items-center'>
           <Item {...merch}/>
-          <button
-          className="text-center border border-orange-500 font-bold text-orange-500 px-2 py-1 rounded-full text-sm hover:bg-orange-600 transition-colors"
-          onClick={(e: React.FormEvent) => {
-            addCart(merch.id)
-          }}
-          >
-            Add To Cart
-          </button>
-          <button
-          className="text-center border border-orange-500 font-bold text-orange-500 px-2 py-1 rounded-full text-sm hover:bg-orange-600 transition-colors"
-          onClick={(e: React.FormEvent) => {
-            deleteCart(merch.id)
-          }}
-          >
-            Remove From Cart
-          </button>
+            <button
+            className="px-12 text-center border border-orange-500 font-bold text-orange-500 px-2 py-1 rounded-full text-sm hover:bg-orange-600 transition-colors"
+            onClick={(e: React.FormEvent) => {
+              addCart(merch.id)
+            }}
+            >
+              Add To Cart
+            </button>
+            <button
+            className="px-10 text-center border border-orange-500 font-bold text-orange-500 px-2 py-1 rounded-full text-sm hover:bg-orange-600 transition-colors"
+            onClick={(e: React.FormEvent) => {
+              deleteCart(merch.id)
+            }}
+            >
+              Remove From Cart
+            </button>
           </div>
 
         ))}
